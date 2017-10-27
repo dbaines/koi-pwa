@@ -1,28 +1,22 @@
-== README
+== Koi PWA test app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The aim of this project is to create a playground to implement best practicies for PWA technologies. 
 
-Things you may want to cover:
+Some of the samples we'll be creating are:
 
-* Ruby version
+1. Webpacker workflow for writing in ES2016+
+1. Offline-first application frame 
+1. Skeleton elements and loading in content from Koi endpoint via AJAX 
+1. Building a service worker using rails
+  - Add to homescreen with custom up-sell interface 
+  - Notifications 
+1. Using credentials API to login to a devise user account with form fallback 
 
-* System dependencies
+## Webpacker
 
-* Configuration
+Gems required:
+1. [Webpacker](https://github.com/rails/webpacker)
+1. [Webpacker-React](https://github.com/renchap/webpacker-react)
 
-* Database creation
+Webpacker allows us to write javascript using ES2016 and beyond. Webpacker-React allows us to easily add react components to our pages and pass in data from our view using view helpers. 
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
