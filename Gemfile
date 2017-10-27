@@ -37,6 +37,9 @@ gem 'newrelic_rpm'
 gem 'ey_config'
 gem 'sidekiq'
 
+# Ornament dependancies
+gem 'htmlentities', '~> 4.3.4'
+
 # PWA dependancies
 gem 'webpacker', '~> 3.0'
 gem 'webpacker-react', "~> 0.3.2"

@@ -1,0 +1,44 @@
+// Display types
+.display-table {
+  display: table;
+  width: 100%;
+}
+.display-table-cell {
+  display: table-cell;
+}
+
+.table {
+  @include table-padding;
+}
+
+.table__flush {
+  @include table-flush;
+}
+
+.table__bordered {
+  @include table-bordered;
+}
+
+.table__striped {
+  @include table-striped;
+}
+
+.table__highlight {
+  @include table-highlight;
+}
+
+// Stackable table
+.table__stack {
+  @include table-stack;
+}
+
+// Scrollable table
+.table-container {
+  max-width: 100%;
+  overflow: auto;
+  -webkit-overflow-scroll: touch;
+
+  table {
+    min-width: 400px;
+  }
+}

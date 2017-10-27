@@ -1,14 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>KoiPwa</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<% content_for :global do %>
 
-<%= yield %>
+  <%- content_for :page_main do -%>
+    <% if content_for? :title %>
+      <h1 class="heading-one page--title">
+        <%= yield :title %>
+      </h1>
+    <% end %>
+    <%= content_for?(:application) ? yield(:application) : yield %>
+  <%- end -%>
 
-</body>
-</html>
+  <%- if content_for? :sidebar -%>
+    <div class="page__with-sidebar">
+      <div class="page--main">
+        <%= yield :page_main -%>
+      </div>
+      <div class="page--sidebar">
+        <%= yield :sidebar -%>
+      </div>
+    </div>
+  <%- elsif content_for? :sidebar_right -%>
+    <div class="page__with-sidebar-right">
+      <div class="page--main">
+        <%= yield :page_main -%>
+      </div>
+      <div class="page--sidebar">
+        <%= yield :sidebar_right -%>
+      </div>
+    </div>
+  <%- else -%>
+    <%= yield :page_main -%>
+  <%- end -%>  
+  
+<% end %>
+
+<%= render :file => "layouts/global" %>

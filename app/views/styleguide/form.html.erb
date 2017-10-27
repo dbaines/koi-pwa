@@ -1,0 +1,1165 @@
+
+<% content_for :title, "Form styles" %>
+
+<% content_for :js_billing_to_shipping do %>
+  Ornament.onLoad(function(){
+    Ornament.C.FormBillingToShipping.create("#checkout_use_billing_address", {
+      "#billing_address_1": "#shipping_address_1",
+      "#billing_address_2": "#shipping_address_2",
+      "#billing_state": "#shipping_state",
+      "#billing_country": "#shipping_country"
+    });
+  });
+<% end %>
+
+<% content_for :scripts_bottom do %>
+  <script>
+    $(document).on("ornament:refresh", function(){ 
+      !Ornament.C.FormDatepicker.enabled && $("[data-jquery-modifiers]").hide();
+    });
+    <%= yield :js_billing_to_shipping -%>
+  </script>
+<% end %>
+
+<div class="content-spacing">
+
+  <div class="panel panel__passive panel--padding">
+    <em>Note: Ornament assumes you are using simple_form to generate form fields.</em>
+  </div>
+
+  <hr />
+
+  <h2 class="heading-two">Spacing out fields</h2>
+
+  <p>All fields are spaced using the <code>inputs</code> class.</p>
+  <p>The <code>inputs</code> class only affects direct children, so any nested inputs will need another <code>inputs</code> class.</p>
+  <p>You can space any buttons away from the inputs above by using the <code>actions</code> class.</p>
+
+  <p>Error blocks should live inside the <code>inputs</code> class as it will space it out from the fields as well.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-spacing", ruby: capture { -%>
+&lt;div class="inputs">
+  &lt;%- unless f.error_notification.blank? -%>
+    &lt;%= f.error_notification %>
+  &lt;%- end -%>
+  &lt;%= f.input :field_1 -%&gt;
+  &lt;%= f.input :field_2 -%&gt;
+&lt;/div>
+&lt;div class="actions">
+  &lt;%= f.button :button, "Submit" -%&gt;
+&lt;/div>
+  <%- } } do -%>
+<div class="inputs">
+  <div class="panel__error panel--padding">
+    Errors were found!
+  </div>
+  <div class="control-group">
+    <label class="optional control-label">Field</label>
+    <div class="controls">
+      <input class="form--medium" type="text" />
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="optional control-label">Field</label>
+    <div class="controls">
+      <input class="form--medium" type="text" />
+    </div>
+  </div>
+</div>
+<div class="actions">
+  <button class="button">Submit</button>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Form field lengths</h2>
+
+  <p>Field lengths can be controlled with <code>form--*</code> classes.</p>
+
+  <p>You can add these classes to the input directly to only size the input, or you can add the class to the wrapper to size the input along with any hints, labels, error messages etc. that are associated.</p>
+
+  <p>The available lengths are:</p>
+
+  <div class="inputs">
+    <div class="control-group">
+      <label class="optional control-label"><code>.form--large</code></label>
+      <div class="controls">
+        <input class="form--large" type="text" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="optional control-label"><code>.form--medium</code></label>
+      <div class="controls">
+        <input class="form--medium" type="text" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="optional control-label"><code>.form--small</code></label>
+      <div class="controls">
+        <input class="form--small" type="text" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="optional control-label"><code>.form--x-small</code></label>
+      <div class="controls">
+        <input class="form--x-small" type="text" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="optional control-label"><code>.form--auto</code></label>
+      <div class="controls">
+        <select class="form--auto">
+          <option>Please select</option>
+          <option>Lorem</option>
+          <option>Ipsum</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <p>If you want a thinner input field, you can use <code>.input__tight</code>:</p>
+
+  <div class="control-group">
+    <label class="optional control-label"><code>.form--x-small.input__tight</code></label>
+    <div class="controls">
+      <input class="form--x-small input__tight" type="text" />
+    </div>
+  </div>
+
+  <hr />
+
+  <h2 class="heading-two">Field modifiers</h2>
+
+  <p>Placeholders are added with the <code>placeholder</code> input attribute.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-modifiers-placeholder", ruby: capture { -%>
+&lt;%= f.input :example, placeholder: "Example Placeholder" -%&gt;
+  <%- } } do -%>
+<div class="control-group string required form--medium">
+  <label class="string required control-label" for="modifier-placeholder">
+    <abbr title="required">*</abbr> Your name
+  </label>
+  <div class="controls">
+    <input class="string required" id="modifier-placeholder" type="text" placeholder="Example Placeholder">
+  </div>
+</div>
+  <%- end -%>
+
+  <p>Hints appear inside the label element just after the text for the label and use the class <code>hint-block</code>.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-modifiers-hint", ruby: capture { -%>
+&lt;%= f.input :example, hint: "Example Hint" -%&gt;
+  <%- } } do -%>
+<div class="control-group string required form--medium">
+  <label class="string required control-label" for="modifier-hint">
+    <abbr title="required">*</abbr> Your name
+    <p class='hint-block'>This is a hint message.</p>
+  </label>
+  <div class="controls">
+    <input class="string required" id="modifier-hint" type="text">
+  </div>
+</div>
+  <%- end -%>
+
+  <p>Errors appear inline next to labels and use the <code>error-block</code> class.</p>
+  <p>The wrapper should also get the class of <code>error</code> to colour the label.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-modifiers-error", ruby: capture { -%>
+&lt;%= f.input :example, error: "Example Error" -%&gt;
+  <%- } } do -%>
+<div class="control-group string required form--medium error">
+  <label class="string required control-label" for="modifier-error">
+    <abbr title="required">*</abbr> Your name<span class='error-block'>can't be blank</span>
+  </label>
+  <div class="controls">
+    <input class="string required" id="modifier-error" type="text">
+  </div>
+</div>
+  <%- end -%>
+
+  <p>Disabled fields use the <code>disabled</code> input attribute.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "disabled", ruby: capture { -%>
+&lt;%= f.input :example, disabled: true -%&gt;
+  <%- } } do -%>
+<div class="control-group string required form--medium">
+  <label class="string required control-label" for="modifier-disabled">
+    <abbr title="required">*</abbr> Your name
+  </label>
+  <div class="controls">
+    <input class="string required" id="modifier-disabled" type="text" disabled>
+  </div>
+</div>
+  <%- end -%>
+
+  <p>Similarly, read-only fields use the <code>readonly</code> input attribute.</p>
+  <p>Be aware of the <a href="http://stackoverflow.com/questions/7730695/whats-the-difference-between-disabled-disabled-and-readonly-readonly-for-ht">difference between readonly and disabled</a> and use the correct one where appropriate.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "readonly", ruby: capture { -%>
+&lt;%= f.input :example, readonly: true -%&gt;
+  <%- } } do -%>
+<div class="control-group string required form--medium">
+  <label class="string required control-label" for="modifier-readonly">
+    <abbr title="required">*</abbr> Your name
+  </label>
+  <div class="controls">
+    <input class="string required" id="modifier-readonly" type="text" readonly>
+  </div>
+</div>
+  <%- end -%>
+
+  <div data-jquery-modifiers>
+    <p>jQuery Datepicker can be added by giving your input field the class <code>datepicker</code>.</p>
+
+    <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-modifiers-disabled", ruby: capture { -%>
+&lt;%= f.input :example, input_class: { "datepicker" } -%&gt;
+    <%- } } do -%>
+<div class="control-group string required form--medium">
+  <label class="string required control-label" for="datepicker">
+    Date
+  </label>
+  <div class="controls">
+    <input class="string required datepicker" id="datepicker" type="text">
+  </div>
+</div>
+    <%- end -%>
+
+    <p>Alternatively there's also a datetimepicker using the <code>datetimepicker</code> class.</p>
+
+    <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-modifiers-disabled", ruby: capture { -%>
+&lt;%= f.input :example, input_class: { "datetimepicker" } -%&gt;
+    <%- } } do -%>
+<div class="control-group string required form--medium">
+  <label class="string required control-label" for="datetimepicker">
+    Date
+  </label>
+  <div class="controls">
+    <input class="string required datetimepicker" id="datetimepicker" type="text">
+  </div>
+</div>
+    <%- end -%>
+  </div>
+
+  <p>You can customise the settings of your datepicker by passing in data attributes in the format of <code>data-datepicker-&lt;setting>=""</code>. eg. <code>data-datepicker-changemonth="false"</code>.</p>
+
+  <hr />
+
+  <h2 class="heading-two">Radios and checkboxes</h2>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-checkboxes", ruby: capture { -%>
+&lt;%= f.input :example, as: :check_boxes -%&gt;
+  <%- } } do -%>
+<div class="control-group check_boxes required">
+  <label class="check_boxes required control-label">
+    Basic checkboxes
+  </label>
+  <div class="controls">
+    <label class="checkbox">
+      <input class="check_boxes required" id="checkboxes_true" name="form[checkboxes]" type="checkbox" value="true">Yes
+    </label>
+    <label class="checkbox">
+      <input class="check_boxes required" id="checkboxes_false" name="form[checkboxes]" type="checkbox" value="false">No
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-radios", ruby: capture { -%>
+&lt;%= f.input :example, as: :radios -%&gt;
+  <%- } } do -%>
+<div class="control-group radio_buttons required">
+  <label class="radio_buttons required control-label">
+    Basic radios
+  </label>
+  <div class="controls">
+    <label class="radio">
+      <input class="radio_buttons required" id="radios_true" name="form[radios]" type="radio" value="true">Yes
+    </label>
+    <label class="radio">
+      <input class="radio_buttons required" id="radios_false" name="form[radios]" type="radio" value="false">No
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-horizontal-radios", ruby: capture { -%>
+&lt;%= f.input :example, as: :check_boxes, wrapper_html: { class: "form--horizontal" } -%&gt;
+  <%- } } do -%>
+<div class="control-group radio_buttons required form--horizontal">
+  <label class="radio_buttons required control-label">
+    Horizontal radios/checkboxes with wrapper class of <code>form--horizontal</code>
+  </label>
+  <div class="controls">
+    <label class="radio">
+      <input class="radio_buttons required" id="horizontal_radios_true" name="form[horizontal_radios]" type="radio" value="true">Yes
+    </label>
+    <label class="radio">
+      <input class="radio_buttons required" id="horizontal_radios_false" name="form[horizontal_radios]" type="radio" value="false">No
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-single-checkbox", ruby: capture { -%>
+&lt;%= f.input :example, as: :boolean -%&gt;
+  <%- } } do -%>
+<div class="control-group boolean optional">
+  <label class="boolean optional control-label" for="single-checkbox">
+    A single checkbox / boolean
+  </label>
+  <div class="controls">
+    <input name="form[single-checkbox]" type="hidden" value="0">
+    <label class="checkbox">
+      <input class="boolean optional" id="single-checkbox" name="form[single-checkbox]" type="checkbox" value="1">
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Enhanced Radios and checkboxes</h2>
+
+  <p>Note: falls back to regular radios/checkboxes in IE8</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-checkboxes-enhanced", ruby: capture { -%>
+&lt;%= f.input :example, as: :check_boxes, wrapper_html: { class: "form--enhanced" } -%&gt;
+  <%- } } do -%>
+<div class="control-group check_boxes required form--enhanced">
+  <label class="check_boxes required control-label">
+    Enhanced checkboxes with wrapper class of <code>form--enhanced</code>
+  </label>
+  <div class="controls">
+    <label class="checkbox">
+      <input class="check_boxes required" id="checkboxes_true" name="form[checkboxes_enhanced]" type="checkbox" value="true">Yes
+    </label>
+    <label class="checkbox">
+      <input class="check_boxes required" id="checkboxes_false" name="form[checkboxes_enhanced]" type="checkbox" value="false">No
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-radios-enhanced", ruby: capture { -%>
+&lt;%= f.input :example, as: :radios, wrapper_html: { class: "form--enhanced" } -%&gt;
+  <%- } } do -%>
+<div class="control-group radio_buttons required form--enhanced">
+  <label class="radio_buttons required control-label">
+    Enhanced radios with wrapper class of <code>form--enhanced</code>
+  </label>
+  <div class="controls">
+    <label class="radio">
+      <input class="radio_buttons required" id="radios_true" name="form[radios_enhanced]" type="radio" value="true">Yes
+    </label>
+    <label class="radio">
+      <input class="radio_buttons required" id="radios_false" name="form[radios_enhanced]" type="radio" value="false">No
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-horizontal-radios-enhanced", ruby: capture { -%>
+&lt;%= f.input :example, as: :check_boxes, wrapper_html: { class: "form--horizontal form--enhanced" } -%&gt;
+  <%- } } do -%>
+<div class="control-group radio_buttons required form--horizontal form--enhanced">
+  <label class="radio_buttons required control-label">
+    Horizontal radios/checkboxes with wrapper class of <code>form--horizontal</code> and <code>form--enhanced</code>
+  </label>
+  <div class="controls">
+    <label class="radio">
+      <input class="radio_buttons required" id="horizontal_radios_true" name="form[horizontal_radios_enhanced]" type="radio" value="true">Yes
+    </label>
+    <label class="radio">
+      <input class="radio_buttons required" id="horizontal_radios_false" name="form[horizontal_radios_enhanced]" type="radio" value="false">No
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-single-checkbox-enhanced", ruby: capture { -%>
+&lt;%= f.input :example, as: :boolean, wrapper_html: { class: "form--enhanced" } -%&gt;
+  <%- } } do -%>
+<div class="control-group boolean optional checkbox__single form--enhanced">
+  <label class="boolean optional control-label" for="terms_enhanced">
+    A single checkbox / boolean with the wrapper class <code>form--enhanced</code>
+  </label>
+  <div class="controls">
+    <input name="form[terms_enhanced]" type="hidden" value="0">
+    <label class="checkbox">
+      <input class="boolean optional" id="terms_enhanced" name="form[terms_enhanced]" type="checkbox" value="1">
+    </label>
+  </div>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Simple Cocoon Fields</h2>
+
+  <p>Here is a quick way to markup your cocoon fields in rails to make them look a bit nicer by default.</p>
+
+<%- cocoon_field = capture { -%>
+<div class='nested-fields control-group select'>
+  <label class="control-label">My Nested Field</label>
+  <div class="controls cocoon-field form--medium">
+    <div class="cocoon-field--field">
+      <select>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+      </select>
+    </div>
+    <div class="cocoon-field--remove">
+      <button>Remove field</button>
+    </div>
+  </div>
+</div>
+<%- } -%>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-cocoon", ruby: capture { -%>
+&lt;div class='nested-fields control-group select'>
+  &lt;%= f.label :my_nested_field %>
+  &lt;%= f.hint :my_nested_field -%>
+  &lt;%= f.error :my_nested_field -%>
+  &lt;div class="controls cocoon-field form--medium">
+    &lt;div class="cocoon-field--field">
+      &lt;%= f.input_field :my_nested_field, collection: data_source, label_method: :title, value_method: :id, include_blank: true %>
+    &lt;/div>
+    &lt;div class="cocoon-field--remove">
+      &lt;%= link_to_remove_association "Remove", f %>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+  <%- } } do -%>
+<%= cocoon_field -%>
+  <%- end -%>
+
+  <p>And to space out your cocoon fields, simply update your wrapper to add the inputs field, and add a button class to your add button:</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-cocoon", ruby: capture { -%>
+&lt;div class='my_nested_fields inputs'>
+  &lt;%= f.simple_fields_for :my_nested_fields do |nested_field| -%>
+    &lt;%= render 'my_nested_fields', f: nested_field| -%>
+  &lt;%- end -%>
+  &lt;div>
+    &lt;%= link_to_add_association 'Add', f, :my_nested_fields, class: "button" -%>
+  &lt;/div>
+&lt;/div>
+  <%- } } do -%>
+<div class='my_nested_fields inputs'>
+  <%= cocoon_field -%>
+  <%= cocoon_field -%>
+  <%= cocoon_field -%>
+  <div>
+    <button class="button">Add</button>
+  </div>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Limited text fields</h2>
+
+  <p>You can limit text fields by adding a <code>data-limiter</code> attribute. The value sent to the attribute is the number of characters you want to limit the field to. eg:</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-limiter", ruby: capture { -%>
+&lt;%= f.input :example, input_html: { data: { limiter: 30 } } -%&gt;
+  <%- } } do -%>
+<div class="inputs">
+  <input type="text" class="form--medium" data-limiter="30" />
+  <textarea class="form--medium" data-limiter="200"></textarea>
+</div>
+  <%- end -%>
+
+  <p>You can limit by words instead of letters by adding in the <code>data-limiter-word</code> attribute.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-word-limiter", ruby: capture { -%>
+&lt;%= f.input :example, input_html: { data: { limiter: 30, limiter_word: "" } } -%&gt;
+  <%- } } do -%>
+<div class="inputs">
+  <input type="text" class="form--medium" data-limiter="3" data-limiter-word />
+  <textarea class="form--medium" data-limiter="10" data-limiter-word></textarea>
+</div>
+  <%- end -%>
+
+  <p>Both word and character limiter has a "micro" styling option by adding <code>data-limiter-micro</code> to your input.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-limiter-micro", ruby: capture { -%>
+&lt;%= f.input :example, input_html: { data: { limiter: 30, limiter_micro: "" } } -%&gt;
+  <%- } } do -%>
+<div class="inputs">
+  <input type="text" class="form--medium" data-limiter="30" data-limiter-micro />
+  <textarea class="form--medium" data-limiter="200" data-limiter-micro></textarea>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Password Revealer</h2>
+
+  <p>Use <code>data-password-reveal</code> on your input field to add a reveal button. This will toggle the input type between text and password.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "password-reveal", ruby: capture { -%>
+&lt;%= f.input :example, input_html: { data: { password_reveal: "" } } -%&gt;
+  <%- } } do -%>
+<div class="control-group form--medium">
+  <label class="control-label">Password:</label>
+  <div class="controls">
+    <input type="password" data-password-reveal />
+  </div>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Password Score</h2>
+
+  <p>Requires the <a href="https://github.com/dropbox/zxcvbn">zxcvbn gem</a>, and this line to be added to your <code>core.js</code>:<br />
+  <code>//= require zxcvbn-async</code></p>
+
+  <p>Without zxcvbn, it will operate in demo mode as you can see here, which will return a random score on field change.</p>
+
+  <div class="panel__alert panel--padding">
+    <p>Be aware if you are using zxcvbn-ruby for server-side validation that the JS and ruby implementations <a href="https://github.com/envato/zxcvbn-ruby/issues/18" target="_blank">have different results</a>.</p>
+  </div>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-password-score", ruby: capture { -%>
+&lt;%= f.input :example, wrapper_html: { data: { password_sore: "" } } -%&gt;
+  <%- } } do -%>
+<div data-password-score class="control-group">
+  <label class="control-label">Password:</label>
+  <div class="controls">
+    <input type="password" />
+  </div>
+</div>
+  <%- end -%>
+
+  <p>You can customise the label under the field by using <code>data-password-score-label</code>. Here's an example with a custom label, using one of the form sizing classes and the password revealer for good measure.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-password-score-2", ruby: capture { -%>
+&lt;%= f.input :example, input_wrapper: { data: { password_reveal: "" } }, wrapper_html: { class: "form--medium", data: { password_sore: "", password_score_label: "<('.' <)" } } -%&gt;
+  <%- } } do -%>
+<div data-password-score data-password-score-label="<('.' <)" class="control-group form--medium">
+  <label class="control-label">Password:</label>
+  <div class="controls">
+    <input type="password" data-password-reveal />
+  </div>
+</div>
+  <%- end -%>
+
+  <p>Password score comes with a helper to test if zxcbvn is available: <code>Ornament.C.FormPasswordScore.hasZxcvbn</code></p>
+  <p>You can rebind password scores if you need to, for example if the form has been ajaxed in, with <code>Ornament.C.FormPasswordScore.init()</code></p>
+
+  <hr />
+
+  <h2 class="heading-two">Inline Forms Groups</h2>
+
+  <p>A self-contained inline form consists of an input field with a joined button:</p>
+  <p><strong>Note:</strong> icons cannot be applied to <code>input</code> tags, all icon buttons must be <code>button</code> elements.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-inline" } do -%>
+<form class="form-inline">
+  <div class="form-inline--input-container">
+    <input type="text" class="form-inline--input" />
+  </div>
+  <button class="button form-inline--button icon--white">
+    <%= icon("chevron_right") -%>
+  </button>
+</form>
+  <%- end -%>
+
+  <p>You can control the width of them using the regular <code>form--*</code> width classes.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-inline" } do -%>
+<form class="form-inline form--medium">
+  <div class="form-inline--input-container">
+    <input type="text" class="form-inline--input" />
+  </div>
+  <button class="button form-inline--button icon--white">
+    <%= icon("chevron_right") -%>
+  </button>
+</form>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Billing to Shipping</h2>
+
+  <p><code>Ornament.C.FormBillingToShipping.create</code> is a really easy-to-use helper method to copy data from one group of fields to another group of fields when a checkbox is selected.</p>
+
+  <p>All you need to do is first pass in the checkbox selector, then an object of key/value pair selectors matching the fields up.</p>
+
+  <p>Combine with <code>show.js</code> to hide the second group of fields when the checkbox is selected for a nicer user experience.</p>
+
+  <p>Take a look at the JS tab below to see how it works.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-single-checkbox-enhanced", js: capture { -%>
+<%= yield :js_billing_to_shipping -%>
+  <%- } } do -%>
+<div class="inputs">
+  
+  <div class="control-group">
+    <label for="billing_address_1" class="control-label">Billing address 1</label>
+    <div class="controls">
+      <input type="text" name="billing[address_1]" id="billing_address_1" value="Address 1" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="billing_address_2" class="control-label">Billing address 2</label>
+    <div class="controls">
+      <input type="text" name="billing[address_2]" id="billing_address_2" value="Address 2" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="billing_state" class="control-label">Billing address state</label>
+    <div class="controls">
+      <input type="text" name="billing[state]" id="billing_state" value="My state" />
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="billing_country" class="control-label">Billing country</label>
+    <div class="controls">
+      <input type="text" name="billing[country]" id="billing_country" value="Australia" />
+    </div>
+  </div>
+
+  <div class="control-group boolean">
+    <label class="boolean control-label" for="checkout_use_billing_address">
+      Ship to billing address
+    </label>
+    <div class="controls">
+      <input name="checkout[use_billing_address]" type="hidden" value="0">
+      <label class="checkbox">
+        <input class="boolean" id="checkout_use_billing_address" name="checkout[use_billing_address]" type="checkbox" value="1">
+      </label>
+    </div>
+  </div>
+
+  <div class="inputs" data-show="checkout_use_billing_address" data-show-inverse>
+
+    <div class="control-group">
+      <label for="shipping_address_1" class="control-label">Shipping address 1</label>
+      <div class="controls">
+        <input type="text" name="shipping[address_1]" id="shipping_address_1" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="shipping_address_2" class="control-label">Shipping address 2</label>
+      <div class="controls">
+        <input type="text" name="shipping[address_2]" id="shipping_address_2" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="shipping_state" class="control-label">Shipping address state</label>
+      <div class="controls">
+        <input type="text" name="shipping[state]" id="shipping_state" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label for="shipping_country" class="control-label">Shipping country</label>
+      <div class="controls">
+        <input type="text" name="shipping[country]" id="shipping_country" />
+      </div>
+    </div>
+
+  </div>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Full-width search field</h2>
+
+  <p>A common pattern for search pages:</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-search" } do -%>
+<form class="form-search">
+  <label for="search_things" class="form-search--label">Search Things:</label>
+  <div class="form-inline">
+    <div class="form-inline--input-container">
+      <input type="text" class="form-inline--input" id="search_things" name="search_things" />
+    </div>
+    <button type="submit" class="button form-inline--button icon--white">
+      <%= icon("chevron_right") -%>
+    </button>
+  </div>
+</form>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Sibling fields</h2>
+
+  <p>Put two fields next to eachother by making them siblings:</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-siblings" } do -%>
+<div class="form-siblings">
+  <div class="form-siblings--sibling">
+    <div class="control-group">
+      <label class="optional control-label">Month</label>
+      <div class="controls">
+        <select>
+          <%-
+            months = {
+              "1 - January" => 1,
+              "2 - February" => 2,
+              "3 - March" => 3,
+              "4 - April" => 4,
+              "5 - May" => 5,
+              "6 - June" => 6,
+              "7 - July" => 7,
+              "8 - August" => 8,
+              "9 - September" => 9,
+              "10 - October" => 10,
+              "11 - November" => 11,
+              "12 - December" => 12
+            }
+          -%>
+          <%- months.each do |month,value| -%>
+            <option value="<%= value -%>"><%= month -%></option>
+          <%- end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-siblings--sibling">
+    <div class="control-group">
+      <label class="optional control-label">Year</label>
+      <div class="controls">
+        <select>
+          <%- (Time.current.year..Time.current.year+10).each do |year| -%>
+            <option value="<%= year -%>"><%= year -%></option>
+          <%- end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+  <%- end -%>
+
+  <p>These can be controlled with the form sizing classes above.</p>
+
+<%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "form-siblings-small" } do -%>
+<div class="form-siblings form--medium">
+  <div class="form-siblings--sibling">
+    <div class="control-group">
+      <label class="optional control-label">Month</label>
+      <div class="controls">
+        <select>
+          <%-
+            months = {
+              "1 - January" => 1,
+              "2 - February" => 2,
+              "3 - March" => 3,
+              "4 - April" => 4,
+              "5 - May" => 5,
+              "6 - June" => 6,
+              "7 - July" => 7,
+              "8 - August" => 8,
+              "9 - September" => 9,
+              "10 - October" => 10,
+              "11 - November" => 11,
+              "12 - December" => 12
+            }
+          -%>
+          <%- months.each do |month,value| -%>
+            <option value="<%= value -%>"><%= month -%></option>
+          <%- end %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="form-siblings--sibling">
+    <div class="control-group">
+      <label class="optional control-label">Year</label>
+      <div class="controls">
+        <select>
+          <%- (Time.current.year..Time.current.year+10).each do |year| -%>
+            <option value="<%= year -%>"><%= year -%></option>
+          <%- end %>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-one">Long form example</h2>
+
+  <form accept-charset="UTF-8" action="#" class="simple_form" method="post" novalidate="novalidate">
+    <div class="inputs">
+
+      <div class="panel__error panel--padding">
+        Some errors were found, please take a look:
+      </div>
+
+      <h2 class="heading-two">Your Information</h2>
+
+      <div class="control-group string required name form--medium error">
+        <label class="string required control-label" for="name">
+          <abbr title="required">*</abbr> Your name<span class='error-block'>can't be blank</span>
+          <p class='hint-block'>This is a hint message.</p>
+        </label>
+        <div class="controls">
+          <input class="string required" id="name" name="form[enrollers_name]" size="50" type="text">
+        </div>
+      </div>
+
+      <div class="control-group string required birth_date form--small">
+        <label class="string required control-label" for="birth_date">
+          <abbr title="required">*</abbr> Date of birth
+        </label>
+        <div class="controls">
+          <input class="string required datemask" id="birth_date" name="form[birth_date]" size="50" type="text">
+        </div>
+      </div>
+
+      <div class="control-group tel optional phone_number form--medium">
+        <label class="tel optional control-label" for="phone_number">
+          Phone number</label>
+        <div class="controls">
+          <input class="string tel optional" id="phone_number" name="form[phone_number]" size="50" type="tel">
+        </div>
+      </div>
+
+      <div class="control-group string optional mobile_number form--medium">
+        <label class="string optional control-label" for="mobile_number">
+          Mobile number
+        </label>
+        <div class="controls">
+          <input class="string optional" id="mobile_number" name="form[mobile_number]" size="50" type="text" disabled>
+        </div>
+      </div>
+
+      <div class="control-group string optional date form--medium">
+        <label class="string optional control-label" for="date">
+          Date
+        </label>
+        <div class="controls">
+          <input class="string optional datepicker" id="date" name="form[date]" type="text">
+        </div>
+      </div>
+
+      <div class="control-group email optional email form--medium">
+        <label class="email optional control-label" for="email">
+          Email
+        </label>
+        <div class="controls">
+          <input class="string email optional" id="email" name="form[email]" size="50" type="email">
+        </div>
+      </div>
+
+      <div class="control-group radio_buttons required form--horizontal">
+        <label class="radio_buttons required control-label">
+          <abbr title="required">*</abbr> Show hidden field?
+        </label>
+        <div class="controls">
+          <label class="radio">
+            <input class="radio_buttons required" id="show_hidden_true" name="form[show_hidden]" type="radio" value="true">Yes
+          </label>
+          <label class="radio">
+            <input class="radio_buttons required" id="show_hidden_false" name="form[show_hidden]" type="radio" value="false">No
+          </label>
+        </div>
+      </div>
+
+      <div class="control-group string required hidden_field form--medium" data-show="show_hidden_true" style="display: none;">
+        <label class="string required control-label" for="hidden_field">
+          <abbr title="required">*</abbr> Hidden field
+        </label>
+        <div class="controls">
+          <input class="string required" id="hidden_field" name="form[hidden_field]" size="50" type="text">
+        </div>
+      </div>
+
+      <div class="control-group country required form--medium">
+        <label class="country required control-label" for="country">
+          <abbr title="required">*</abbr> Country
+        </label>
+        <div class="controls">
+          <select class="country required" id="country" name="form[country]">
+            <option value="">Please select</option>
+            <option value="AU">Australia</option>&lt;option value="" disabled="disabled"&gt;-------------&lt;/option&gt;
+            <option value="AF">Afghanistan</option>
+            <option value="AL">Albania</option>
+            <option value="DZ">Algeria</option>
+            <option value="AS">American Samoa</option>
+            <option value="AD">Andorra</option>
+            <option value="AO">Angola</option>
+            <option value="AI">Anguilla</option>
+            <option value="AQ">Antarctica</option>
+            <option value="AG">Antigua and Barbuda</option>
+            <option value="AR">Argentina</option>
+            <option value="AM">Armenia</option>
+            <option value="AW">Aruba</option>
+            <option value="AU">Australia</option>
+            <option value="AT">Austria</option>
+            <option value="AZ">Azerbaijan</option>
+            <option value="BS">Bahamas</option>
+            <option value="BH">Bahrain</option>
+            <option value="BD">Bangladesh</option>
+            <option value="BB">Barbados</option>
+            <option value="BY">Belarus</option>
+            <option value="BE">Belgium</option>
+            <option value="BZ">Belize</option>
+            <option value="BJ">Benin</option>
+            <option value="BM">Bermuda</option>
+            <option value="BT">Bhutan</option>
+            <option value="BO">Bolivia</option>
+            <option value="BA">Bosnia and Herzegovina</option>
+            <option value="BW">Botswana</option>
+            <option value="BV">Bouvet Island</option>
+            <option value="BR">Brazil</option>
+            <option value="IO">British Indian Ocean Territory</option>
+            <option value="BN">Brunei Darussalam</option>
+            <option value="BG">Bulgaria</option>
+            <option value="BF">Burkina Faso</option>
+            <option value="BI">Burundi</option>
+            <option value="KH">Cambodia</option>
+            <option value="CM">Cameroon</option>
+            <option value="CA">Canada</option>
+            <option value="CV">Cape Verde</option>
+            <option value="KY">Cayman Islands</option>
+            <option value="CF">Central African Republic</option>
+            <option value="TD">Chad</option>
+            <option value="CL">Chile</option>
+            <option value="CN">China</option>
+            <option value="CX">Christmas Island</option>
+            <option value="CC">Cocos (Keeling) Islands</option>
+            <option value="CO">Colombia</option>
+            <option value="KM">Comoros</option>
+            <option value="CG">Congo</option>
+            <option value="CD">Congo, The Democratic Republic Of The</option>
+            <option value="CK">Cook Islands</option>
+            <option value="CR">Costa Rica</option>
+            <option value="HR">Croatia</option>
+            <option value="CU">Cuba</option>
+            <option value="CY">Cyprus</option>
+            <option value="CZ">Czech Republic</option>
+            <option value="CI">Côte D'Ivoire</option>
+            <option value="DK">Denmark</option>
+            <option value="DJ">Djibouti</option>
+            <option value="DM">Dominica</option>
+            <option value="DO">Dominican Republic</option>
+            <option value="EC">Ecuador</option>
+            <option value="EG">Egypt</option>
+            <option value="SV">El Salvador</option>
+            <option value="GQ">Equatorial Guinea</option>
+            <option value="ER">Eritrea</option>
+            <option value="EE">Estonia</option>
+            <option value="ET">Ethiopia</option>
+            <option value="FK">Falkland Islands (Malvinas)</option>
+            <option value="FO">Faroe Islands</option>
+            <option value="FJ">Fiji</option>
+            <option value="FI">Finland</option>
+            <option value="FR">France</option>
+            <option value="GF">French Guiana</option>
+            <option value="PF">French Polynesia</option>
+            <option value="TF">French Southern Territories</option>
+            <option value="GA">Gabon</option>
+            <option value="GM">Gambia</option>
+            <option value="GE">Georgia</option>
+            <option value="DE">Germany</option>
+            <option value="GH">Ghana</option>
+            <option value="GI">Gibraltar</option>
+            <option value="GR">Greece</option>
+            <option value="GL">Greenland</option>
+            <option value="GD">Grenada</option>
+            <option value="GP">Guadeloupe</option>
+            <option value="GU">Guam</option>
+            <option value="GT">Guatemala</option>
+            <option value="GG">Guernsey</option>
+            <option value="GN">Guinea</option>
+            <option value="GW">Guinea-Bissau</option>
+            <option value="GY">Guyana</option>
+            <option value="HT">Haiti</option>
+            <option value="HM">Heard and McDonald Islands</option>
+            <option value="VA">Holy See (Vatican City State)</option>
+            <option value="HN">Honduras</option>
+            <option value="HK">Hong Kong</option>
+            <option value="HU">Hungary</option>
+            <option value="IS">Iceland</option>
+            <option value="IN">India</option>
+            <option value="ID">Indonesia</option>
+            <option value="IR">Iran, Islamic Republic Of</option>
+            <option value="IQ">Iraq</option>
+            <option value="IE">Ireland</option>
+            <option value="IM">Isle of Man</option>
+            <option value="IL">Israel</option>
+            <option value="IT">Italy</option>
+            <option value="JM">Jamaica</option>
+            <option value="JP">Japan</option>
+            <option value="JE">Jersey</option>
+            <option value="JO">Jordan</option>
+            <option value="KZ">Kazakhstan</option>
+            <option value="KE">Kenya</option>
+            <option value="KI">Kiribati</option>
+            <option value="KP">Korea, Democratic People's Republic Of</option>
+            <option value="KR">Korea, Republic of</option>
+            <option value="KW">Kuwait</option>
+            <option value="KG">Kyrgyzstan</option>
+            <option value="LA">Lao People's Democratic Republic</option>
+            <option value="LV">Latvia</option>
+            <option value="LB">Lebanon</option>
+            <option value="LS">Lesotho</option>
+            <option value="LR">Liberia</option>
+            <option value="LY">Libyan Arab Jamahiriya</option>
+            <option value="LI">Liechtenstein</option>
+            <option value="LT">Lithuania</option>
+            <option value="LU">Luxembourg</option>
+            <option value="MO">Macao</option>
+            <option value="MK">Macedonia, the Former Yugoslav Republic Of</option>
+            <option value="MG">Madagascar</option>
+            <option value="MW">Malawi</option>
+            <option value="MY">Malaysia</option>
+            <option value="MV">Maldives</option>
+            <option value="ML">Mali</option>
+            <option value="MT">Malta</option>
+            <option value="MH">Marshall Islands</option>
+            <option value="MQ">Martinique</option>
+            <option value="MR">Mauritania</option>
+            <option value="MU">Mauritius</option>
+            <option value="YT">Mayotte</option>
+            <option value="MX">Mexico</option>
+            <option value="FM">Micronesia, Federated States Of</option>
+            <option value="MD">Moldova, Republic of</option>
+            <option value="MC">Monaco</option>
+            <option value="MN">Mongolia</option>
+            <option value="ME">Montenegro</option>
+            <option value="MS">Montserrat</option>
+            <option value="MA">Morocco</option>
+            <option value="MZ">Mozambique</option>
+            <option value="MM">Myanmar</option>
+            <option value="NA">Namibia</option>
+            <option value="NR">Nauru</option>
+            <option value="NP">Nepal</option>
+            <option value="NL">Netherlands</option>
+            <option value="AN">Netherlands Antilles</option>
+            <option value="NC">New Caledonia</option>
+            <option value="NZ">New Zealand</option>
+            <option value="NI">Nicaragua</option>
+            <option value="NE">Niger</option>
+            <option value="NG">Nigeria</option>
+            <option value="NU">Niue</option>
+            <option value="NF">Norfolk Island</option>
+            <option value="MP">Northern Mariana Islands</option>
+            <option value="NO">Norway</option>
+            <option value="OM">Oman</option>
+            <option value="PK">Pakistan</option>
+            <option value="PW">Palau</option>
+            <option value="PS">Palestinian Territory, Occupied</option>
+            <option value="PA">Panama</option>
+            <option value="PG">Papua New Guinea</option>
+            <option value="PY">Paraguay</option>
+            <option value="PE">Peru</option>
+            <option value="PH">Philippines</option>
+            <option value="PN">Pitcairn</option>
+            <option value="PL">Poland</option>
+            <option value="PT">Portugal</option>
+            <option value="PR">Puerto Rico</option>
+            <option value="QA">Qatar</option>
+            <option value="RO">Romania</option>
+            <option value="RU">Russian Federation</option>
+            <option value="RW">Rwanda</option>
+            <option value="RE">Réunion</option>
+            <option value="BL">Saint Barthélemy</option>
+            <option value="SH">Saint Helena</option>
+            <option value="KN">Saint Kitts And Nevis</option>
+            <option value="LC">Saint Lucia</option>
+            <option value="MF">Saint Martin</option>
+            <option value="PM">Saint Pierre And Miquelon</option>
+            <option value="VC">Saint Vincent And The Grenedines</option>
+            <option value="WS">Samoa</option>
+            <option value="SM">San Marino</option>
+            <option value="ST">Sao Tome and Principe</option>
+            <option value="SA">Saudi Arabia</option>
+            <option value="SN">Senegal</option>
+            <option value="RS">Serbia</option>
+            <option value="SC">Seychelles</option>
+            <option value="SL">Sierra Leone</option>
+            <option value="SG">Singapore</option>
+            <option value="SK">Slovakia</option>
+            <option value="SI">Slovenia</option>
+            <option value="SB">Solomon Islands</option>
+            <option value="SO">Somalia</option>
+            <option value="ZA">South Africa</option>
+            <option value="GS">South Georgia and the South Sandwich Islands</option>
+            <option value="ES">Spain</option>
+            <option value="LK">Sri Lanka</option>
+            <option value="SD">Sudan</option>
+            <option value="SR">Suriname</option>
+            <option value="SJ">Svalbard And Jan Mayen</option>
+            <option value="SZ">Swaziland</option>
+            <option value="SE">Sweden</option>
+            <option value="CH">Switzerland</option>
+            <option value="SY">Syrian Arab Republic</option>
+            <option value="TW">Taiwan, Republic Of China</option>
+            <option value="TJ">Tajikistan</option>
+            <option value="TZ">Tanzania, United Republic of</option>
+            <option value="TH">Thailand</option>
+            <option value="TL">Timor-Leste</option>
+            <option value="TG">Togo</option>
+            <option value="TK">Tokelau</option>
+            <option value="TO">Tonga</option>
+            <option value="TT">Trinidad and Tobago</option>
+            <option value="TN">Tunisia</option>
+            <option value="TR">Turkey</option>
+            <option value="TM">Turkmenistan</option>
+            <option value="TC">Turks and Caicos Islands</option>
+            <option value="TV">Tuvalu</option>
+            <option value="UG">Uganda</option>
+            <option value="UA">Ukraine</option>
+            <option value="AE">United Arab Emirates</option>
+            <option value="GB">United Kingdom</option>
+            <option value="US">United States</option>
+            <option value="UM">United States Minor Outlying Islands</option>
+            <option value="UY">Uruguay</option>
+            <option value="UZ">Uzbekistan</option>
+            <option value="VU">Vanuatu</option>
+            <option value="VE">Venezuela, Bolivarian Republic of</option>
+            <option value="VN">Viet Nam</option>
+            <option value="VG">Virgin Islands, British</option>
+            <option value="VI">Virgin Islands, U.S.</option>
+            <option value="WF">Wallis and Futuna</option>
+            <option value="EH">Western Sahara</option>
+            <option value="YE">Yemen</option>
+            <option value="ZM">Zambia</option>
+            <option value="ZW">Zimbabwe</option>
+            <option value="AX">Åland Islands</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group boolean optional checkbox__single">
+        <label class="boolean optional control-label" for="terms">
+          I have read and agreed to these terms &amp; conditions.
+        </label>
+        <div class="controls">
+          <input name="enrollment[terms]" type="hidden" value="0">
+          <label class="checkbox">
+            <input class="boolean optional" id="terms" name="form[terms]" type="checkbox" value="1">
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="actions">
+      <button class="button">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-class PagesController < Koi::CrudController
+class PagesController < CrudController
 
   # Stop accidental leakage of unwanted actions to frontend
 

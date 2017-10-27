@@ -1,0 +1,67 @@
+<% content_for :title, "JS Helpers" %>
+
+<div class="content">
+
+  <h2>Component Framework</h2>
+
+  <p>Most javascript components will be exposed to the <code>Ornament.Component</code> namespace.</p>
+  <p>There is also the <code>Ornament.C</code> shorthand namespace for convenience.</p>
+  <p>For example you can pop open the TrayNav programatically with <code>Ornament.C.TrayNav.openMenu()</code>
+  <p>Execute <code>Ornament.C</code> in your console to see what you have available to you.</p>
+
+  <hr />
+
+  <h2>Feature detection</h2>
+
+  <p>You can view a list of supported features that Ornament looks for by executing this command:</p>
+  <p><code>Ornament.features</code></p>
+
+  <p>There are some basic feature detection booleans available:</p>
+
+  <p><code>Ornament.features.serviceWorker</code></p>
+  <p><code>Ornament.features.geolocation</code></p>
+  <p><code>Ornament.features.turbolinks</code></p>
+  <p><code>Ornament.features.ie8</code></p>
+
+  <hr />
+
+  <h2>Asset preloader</h2>
+
+  <p>You can tell the browser to try and preload assets using <code>Ornament.assetPreloader([]);</code>, eg:</p>
+
+  <p><code>Ornament.assetPreloader([ "/assets/image1.jpg", "/assets/image2.jpg" ]);</code></p>
+
+  <hr />
+
+  <h2>Window Dimensions</h2>
+
+  <p>You can return a browser-agnostic window dimensions using the following functions:</p>
+
+  <ul>
+    <li><code>Ornament.windowWidth();</code></li>
+    <li><code>Ornament.windowHeight();</code></li>
+  </ul>
+
+  <hr />
+
+  <h2>Measuring an element while it's hidden</h2>
+
+  <p>Measuring an element can be tricky while it's hidden. This function will clone the element off the browser canvas, measure a dimension and then remove the clone:</p>
+
+  <p><code>Ornament.measure($element, metric)</code></p>
+
+  <p>For example, if I had a <code>&lt;div id="test" /></code> and wanted to measure it's height, I would use:</p>
+
+  <p><code>Ornament.measure($("#test"), height);</code></p>
+
+  <hr />
+
+  <h2>Animated ScrollTo</h2>
+
+  <p>Scroll to an Y co-ordinate smoothly by using:</p>
+  <p><code>Ornament.bodyScroll(offset)</code></p>
+
+  <p>eg. Scroll 200px from the top of the page:</p>
+  <p><code>Ornament.bodyScroll(200)</code></p>
+
+</div>

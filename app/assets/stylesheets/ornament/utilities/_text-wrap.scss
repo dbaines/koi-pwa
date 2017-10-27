@@ -1,0 +1,8 @@
+@mixin text-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.text-wrap {
+  @include text-wrap;
+}

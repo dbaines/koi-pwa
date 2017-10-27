@@ -1,0 +1,314 @@
+// Styling settings 
+$drilldown-bg: $passive-color;
+$drilldown-links: $foreground-color;
+$drilldown-border: 1px solid $white;
+$drilldown-item-padding-y: $xxx-small-unit;
+$drilldown-item-padding-x: $x-small-unit;
+
+// If true, adds border between each drilldown item
+// If false, only adds border between back button and description block
+$drilldown-borders-between-items: true;
+
+// Use SVG icons from the Ornament.icons namespace instead of arrow characters 
+// Will need to match the same setting in drilldown.js
+$use-svg-icons: false;
+
+// Animate panes entirely or list items individually
+// (AKA old Ornament TrayNav animation style)
+$animate-panes: false;
+
+// All panes slide out instantly, but list items stagger
+// If set to false, list items stagger both ways 
+// This does nothing if $animate-panes is set to true
+$instant-transition: true;
+
+// Hide the old pane immediately with no transition 
+$block-out-past-panes: false;
+
+// Transform states 
+$list-item-distance: 120px;
+$drilldown-future-transforms: translateX($list-item-distance);
+$drilldown-past-transforms: translateX($list-item-distance * -1);
+
+// =========================================================================
+// Core styles
+// =========================================================================
+
+[data-drilldown] {
+  visibility: hidden;
+}
+
+.drilldown {
+  position: relative;
+  overflow: hidden;
+  transition: height $ease-timing $ease-in;
+  will-change: height;
+  perspective: 1200px;
+}
+
+.drilldown [data-drilldown],
+.drilldown[data-drilldown] {
+  visibility: visible;
+}
+
+.drilldown--list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+  // visibility: hidden;
+  
+  &.drilldown--list__current,
+  .drilldown__transitioning & {
+    visibility: visible;
+  }
+
+  @if $block-out-past-panes {
+    background: $drilldown-bg;
+  }
+  
+  @if $animate-panes {
+    will-change: transform, opacity;
+    // opacity: 0;
+    transition: transform $ease-timing $ease-in, 
+                opacity .1s $ease-in;
+  } @else {
+    li {
+      transform-origin: 0 50%;
+      will-change: transform, opacity;
+      opacity: 0;
+      transition: transform $ease-timing $ease-in, 
+                  opacity $ease-timing $ease-in;
+      transform: $drilldown-future-transforms;
+    } 
+  }
+}
+
+.drilldown--list.drilldown--list__immediate {
+  @if $animate-panes {
+    transition: none;
+  } @else {
+    li {
+      transition: none;
+    }
+  }
+}
+
+@if $instant-transition {
+  .drilldown--list__move-all {
+    li {
+      transition-delay: 0s !important;
+    }
+  }
+}
+
+.drilldown--list__past {
+  @if $animate-panes {
+    transform: translateX(-100%);
+  } @else {
+    li {
+      transform: $drilldown-past-transforms;
+      // force immediate transition out of past items
+      // transition-delay: 0s !important;
+    }
+  }
+}
+
+.drilldown--list__future {
+  @if $animate-panes {
+    transform: translateX(100%);
+  } @else {
+    li {
+      // force immediate transition out of past items
+      // transition-delay: 0s !important;
+    }
+  }
+}
+
+.drilldown--list__current {
+  z-index: 1;
+  
+  @if $animate-panes {
+    // opacity: 1;
+  } @else {
+    li {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+.drilldown__initial {
+  // padding-top: $xxx-small-unit;
+  // padding-bottom: $xxx-small-unit;
+}
+
+// =========================================================================
+// Styling
+// =========================================================================
+
+.drilldown {
+  // color: $white;
+  background: $drilldown-bg;
+
+  a,button {
+    @include color-link($drilldown-links, $drilldown-links);
+    @include decorate-link(none, none);
+  }
+}
+
+// Back buttons 
+.drilldown--back {
+  @if not $drilldown-borders-between-items {
+    border-bottom: $drilldown-border;
+  }
+
+  // Back buttons 
+  @if $use-svg-icons == true {
+    svg {
+      width: $xxx-small-unit;
+      height: $xxx-small-unit;
+      margin-right: $xxxxx-small-unit;
+    }
+    .icon--stroke {
+      stroke: $white;
+    }
+  } @else {
+    button > div::before {
+      content: "‹";
+      padding-right: .5em;
+    }
+  }
+}
+
+.drilldown--back-button {
+  width: 100%;
+  @include border-radius(0);
+
+  @if $use-svg-icons == true {
+    > div {
+      @include display-flex;
+      @include align-items(center);
+    }
+  }
+}
+
+.drilldown--item > a,
+.drilldown--item > button,
+.drilldown--back button {
+  @include disable-mouse-outline;
+}
+
+// Consistent padding on various elements
+.drilldown--item > a,
+.drilldown--item > button,
+.drilldown--back button,
+.drilldown--title {
+  padding: $drilldown-item-padding-y $drilldown-item-padding-x;
+}
+
+.drilldown--item > button {
+  width: 100%;
+}
+
+.drilldown--description {
+  padding: $small-unit $drilldown-item-padding-x;
+
+  @if not $drilldown-borders-between-items {
+    border-bottom: $drilldown-border;
+    margin-bottom: $xxx-small-unit;
+  }
+}
+
+.drilldown--description--title {
+  font-size: $large-font-size;
+  @include font($bold-font);
+}
+
+// Parent link arrows
+.drilldown--item__parent a,
+.drilldown--item__parent button {
+  position: relative;
+  
+  @if $use-svg-icons == true {
+    svg {
+      position: absolute;
+      top: 50%;
+      width: $xxx-small-unit;
+      height: $xxx-small-unit;
+      right: $xxx-small-unit;
+      transform: translateY(-50%);
+
+    }
+    .icon--stroke {
+      stroke: $white;
+    }
+  } @else {
+    &::before {
+      content: "›";
+      position: absolute;
+      top: 50%;
+      right: $xxx-small-unit;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.drilldown--item--arrow {
+  position: absolute;
+  top: 50%;
+  right: $xxx-small-unit;
+  transform: translateY(-50%);
+}
+
+.drilldown--item__split {
+  display: flex;
+  
+  a {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+  
+  a::before {
+    display: none;
+  }
+  
+  button {
+    flex-grow: 0;
+    flex-shrink: 0;
+    border: 0;
+    width: 44px;
+    text-align: center;
+    background: $primary-color;
+    cursor: pointer;
+    color: $white;
+  }
+
+  svg {
+    width: $xxx-small-unit;
+    height: $xxx-small-unit;
+  }
+
+  .icon--stroke {
+    stroke: $white;
+  }
+}
+
+.drilldown--item {
+  a {
+    display: block;
+  }
+}
+
+// Borders between items
+@if $drilldown-borders-between-items {
+  .drilldown--item + .drilldown--item {
+    border-top: $drilldown-border;
+  }
+}
+
+// Active state
+.drilldown .simple-navigation-active-leaf a.selected {
+  background: rgba($primary-color, .2);
+}

@@ -1,0 +1,30 @@
+<% content_for :title, "Select Link" %>
+
+<div class="content-spacing">
+
+  <p>Select links convert <code>select</code> elements in to linkable objects.</p>
+
+  <p>All you need to do to make this happen is add <code>data-select-link</code> on your select element, then use the URLs as the <code>value</code> for each <code>option</code>.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "select-link" } do -%>
+<select data-select-link class="form--medium">
+  <option value="">Select a page...</option>
+  <option value="http://google.com.au">Google</option>
+  <option value="http://katalyst.com.au">Visit the Katalyst Website</option>
+</select>
+  <%- end -%>
+
+  <p>If the select contains a link that matches the URL of the page the user is currently on, it will automatically make that one selected on page load. This is helpful if using it as a navigation tool:</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "select-link-2" } do -%>
+<select data-select-link class="form--medium">
+  <option value="">Select a page...</option>
+  <option value="http://google.com.au">Google</option>
+  <option value="http://google.com.au">Google</option>
+  <option value="http://google.com.au">Google</option>
+  <option value="<%= request.path -%>"><%= request.path -%></option>
+  <option value="http://google.com.au">Google</option>
+</select>
+  <%- end -%>
+
+</div>

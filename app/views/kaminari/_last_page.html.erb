@@ -1,0 +1,12 @@
+<%# Link to the "Last" page
+  - available local variables
+    url:           url to the last page
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
+
+<span class="pagination--last <%= "disabled" if current_page.last? -%>">
+  <%= link_to_unless current_page.last?, icon("chevron_right_double", width: 18, height: 16), url, {:remote => remote, title: "Go to last page"} %>
+</span>

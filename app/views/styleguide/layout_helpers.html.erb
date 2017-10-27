@@ -1,0 +1,76 @@
+<%- content_for :title, "Rails Helpers" -%>
+
+<div class="content-spacing">
+  <h2 class="heading-two">link_helper()</h2>
+
+  <p><code>link_helper(url)</code> will output a <code>link_to</code> and format the URL and the text that gets output.</p>
+
+  <p>If there is no "http://" or "https://" in the URL it will add "http://"</p>
+
+  <p>The link text that gets output will strip out "http(s)://" as well as "www."</p>
+
+  <p>Example:</p>
+
+  <p><code>link_helper("http://www.google.com")</code>: <%= link_helper("http://www.google.com") -%></p>
+  <p><code>link_helper("google.com")</code>: <%= link_helper("google.com") -%></p>
+
+  <hr />
+
+  <h2 class="heading-two">yes_or_no()</h2>
+
+  <p><code>yes_or_no(boolean)</code> is a simple little helper to convert true/false values in to yes or no.</p>
+
+  <hr />
+
+  <h2 class="heading-two">country_name()</h2>
+
+  <p>A small helper to convert country codes in to correct country names.</p>
+
+  <p><strong>Note:</strong> requires the country_select gem</p>
+
+  <p><code>country_name("au")</code>: Australia</p>
+
+  <hr />
+
+  <h2 class="heading-two">svg_image()</h2>
+
+  <p><code>svg_image(@model.image)</code></p>
+
+  <p>Will take a dragonfly-stored image and output it as inline SVG and will handle missing assets with a fallback message.</p>
+
+  <hr />
+
+  <h2 class="heading-two">Custom DateTime Formats</h2>
+  <%- date = DateTime.new(2012, 8, 29,  0,  0,  0) -%>
+
+  <p>
+    <code>date.to_s(:ornament_full)</code>: <%= date.to_s(:ornament_full) -%>
+  </p>
+
+  <p>
+    <code>date.to_s(:ornament_no_year)</code>: <%= date.to_s(:ornament_no_year) -%>
+  </p>
+
+  <p>
+    <code>date.to_s(:ornament_short)</code>: <%= date.to_s(:ornament_short) -%>
+  </p>
+
+  <hr />
+
+  <h2 class="heading-two">Koi NavItem helpers</h2>
+
+  <p>Find out if a nav_item is nested under a particular key:</p>
+
+  <p>
+    <code>&lt;%= traverse_for_key(@page.get_nav_item, "header_navigation") -%></code>
+  </p>
+
+  <p>Return a key for the nearest "navigation" key:</p>
+
+  <p>
+    <code>&lt;%= traverse_for_nearest_navigation_key(@page.get_nav_item) -%></code>
+  </p>
+
+  <p>Navigation keys are determined at the top of this function in <code>application_helper.rb</code></p>
+
+</div>

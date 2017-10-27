@@ -430,6 +430,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.2)
   engineyard
   ey_config
+  htmlentities (~> 4.3.4)
   i18n-active_record!
   jbuilder (~> 2.0)
   jquery-ui-rails

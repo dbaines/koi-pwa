@@ -1,0 +1,160 @@
+// =========================================================================
+// Sizing Units
+// =========================================================================
+
+$xxxxx-small-unit:      8px;
+$xxxx-small-unit:       12px;
+$xxx-small-unit:        16px;
+$xx-small-unit:         20px;
+$x-small-unit:          24px;
+$small-unit:            28px;
+$default-unit:          32px;
+$large-unit:            36px;
+$x-large-unit:          40px;
+$xx-large-unit:         44px;
+$xxx-large-unit:        48px;
+$xxxx-large-unit:       56px;
+$xxxxx-large-unit:      64px;
+$xxxxxx-large-unit:     72px;
+$xxxxxxx-large-unit:    80px;
+
+// =========================================================================
+// Typogrpahy units
+// =========================================================================
+
+$x-small-font-size:   12px;
+$small-font-size:     14px;
+$base-font-size:      16px;
+$large-font-size:     18px;
+$base-line-height:    1.5;
+$base-line-size:      $base-font-size * $base-line-height;
+
+// =========================================================================
+// Layout and container settings
+// =========================================================================
+
+$layout-mobile-tray-width:  250px;
+$layout-animation-duration: 0.5s;
+
+$fixed-footer: true;
+
+$container-width: 1072px;
+$container-percentage: 92%;
+$container-padding: $default-unit;
+$container-padding-mobile: $xxx-small-unit;
+
+// =========================================================================
+// Misc units
+// =========================================================================
+
+$border-radius:   4px;
+$button-height:   44px;
+
+$panel-padding:         $xx-small-unit;
+$panel-padding-small:   $xxx-small-unit;
+$panel-spacing:         $xx-small-unit;
+
+// =========================================================================
+// Breakpoints
+// =========================================================================
+
+$breakpoint-typography: 480px;
+$breakpoint-large: 1080px;
+$breakpoint-medium: 935px;
+$breakpoint-small: 780px;
+$breakpoint-tiny: 620px;
+
+// Header breakpoint
+// If changing, remember to update the JS variable in defaults.js
+$breakpoint-header: 990px;
+
+$site-breakpoints:
+  (tiny, $breakpoint-tiny),
+  (small, $breakpoint-small),
+  (medium, $breakpoint-medium),
+  (large, $breakpoint-large)
+;
+
+// =========================================================================
+// Gutters
+// =========================================================================
+
+$desktop-gutters: $x-small-unit;
+
+// $large-gutter:    $large-unit;
+// $medium-gutter:   $large-unit;
+// $small-gutter:    $large-unit;
+// $tiny-gutter:     $default-unit;
+
+$site-gutters:
+  // (large, $large-gutter),
+  // (medium, $tiny-gutter),
+  false
+;
+
+// =========================================================================
+// Colours 
+// =========================================================================
+
+$black: #000;
+$white: #fff;
+$grey: #bbb;
+
+$primary-color: #4b9dd0;
+$secondary-color: #252525;
+$passive-color: #eee;
+
+$foreground-color: #222;
+$background-color: #fff;
+
+$link-color: blue;
+$link-hover-color: false;
+
+$error-color: #990000;
+$error-background: #ffcccc;
+
+$alert-color: #F1c40f;
+$alert-background: #ffffcc;
+
+$notice-color: #236cd9;
+$notice-background: #cbdcf6;
+
+$success-color: #2ecc71;
+$success-background: #ccffcc;
+
+$overlay-color: #222;
+
+$facebook: #3b5998;
+$twitter: #44ccf6;
+$linkedin: #1b86bd;
+
+$divider-color: $passive-color;
+$divider: 1px solid $divider-color;
+$image-border: 0;
+
+// =========================================================================
+// Input settings
+// =========================================================================
+
+$input-border-color:         #c5cbd4;
+$input-border-focus-color:   darken($input-border-color,20);
+$input-background:           $white;
+$input-border:               1px solid $input-border-color;
+$input-border-radius:        $border-radius;
+$input-color:                $foreground-color;
+$input-width:                100%;
+$textarea-height:            $base-line-size*5;
+$checkbox-radio-padding:     -0.2em 0 0 0.2em;
+
+// =========================================================================
+// Easing timings
+// =========================================================================
+
+$ease-timing: .2s;
+
+// Default easing timings, swap keywords as variables 
+// Overwrite with cubic-beziers if desired 
+// https://css-tricks.com/ease-out-in-ease-in-out/
+// https://matthewlein.com/tools/ceaser
+$ease-in: ease-out;
+$ease-out: ease-in;

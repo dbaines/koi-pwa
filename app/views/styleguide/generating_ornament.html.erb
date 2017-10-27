@@ -1,0 +1,50 @@
+<% content_for :title, "Generating Ornament" %>
+
+<div class="content-spacing">
+
+  <p>Simply run the ornament generator:</p>
+
+  <pre class="sg-pre">rails generate ornament</pre>
+
+  <hr />
+
+  <h2 class="heading-two">Required Gems</h2>
+
+  <p>Make sure these gems to your Gemfile:</p>
+
+  <pre class="sg-pre">
+gem  'sass-rails',    '~> 5.0.0'
+gem  'uglifier',      '>= 1.0.3'
+gem  'compass-rails', '~> 3.0.2'
+gem  'htmlentities',  '~> 4.3.4'
+</pre>
+
+  <hr />
+
+  <h2 class="heading-two">Asset Precompilation</h2>
+
+  <p>The <code>ornament</code> initialiser will add this line to make sure the required assets get precompiled:</p>
+
+  <pre class="sg-pre">Rails.application.config.assets.precompile += %w( application_split2.css  selectivizr.js respond.js application_bottom.js styleguide.css styleguide_split2.css styleguide.js )</pre>
+
+  <hr />
+  <h2 class="heading-two">Non-Koi projects</h2>
+
+  <p>Ornament was built for Koi, but if you are using it on a non-koi project you will need to take some additional steps:</p>
+
+  <p>Koi comes with simple_form which Ornament has a customised initialiser for. It can be found in <code>config/initializers/simple_form.rb</code>. If you aren't using simple_form you will need to delete or disable this file.</p>
+
+  <p>Koi controllers need to include CommonControllerActions, so if you aren't using Koi you will need to disable this line from the <code>styleguide_controller.rb</code>:</p>
+
+  <pre class="sg-pre">include CommonControllerActions</pre>
+
+  <hr />
+  <h2 class="heading-two">Optional steps</h2>
+
+  <p>Ornament comes with a lot of big components made up of large JS and CSS. Depending on the size of your project you probably won't need everything included.</p>
+
+  <p>At the beginning of a project I typically go in to the <code>application.scss</code>, <code>application.js</code> and <code>application_bottom.js</code> files and disable components I likely won't be using such as object slider, tabs, tooltips etc.</p>
+
+  <p>Then when I start to implement these features in the application I'm developing I will bring them back in.</p>
+
+</div>

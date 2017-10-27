@@ -1,0 +1,168 @@
+<% content_for :title, "Toggle" %>
+
+<div class="content-spacing">
+
+  <h2 class="heading-two">Show/hide something</h2>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-1" } do -%>
+<a href="#" data-toggle-anchor="example-1">Show/hide example 1</a>
+<div data-toggle="example-1">
+  This is the content for example 1
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Group toggles and allow only one to be toggled at any time</h2>
+
+  <p>Toggles can be grouped by adding <code>data-toggle-group="group-name"</code> to each of the anchors. Make sure that the value is shared between the anchors.</p>
+  <p>You can have multiple groups by giving each group a unique toggle-group value.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-2" } do -%>
+<div>
+  <a href="#" data-toggle-anchor="example-2-1" data-toggle-group="example-2">Heading 1</a>
+</div>
+<div data-toggle="example-2-1">
+  This is the content for 1
+</div>
+<div>
+  <a href="#" data-toggle-anchor="example-2-2" data-toggle-group="example-2">Heading 2</a>
+</div>
+<div data-toggle="example-2-2">
+  This is the content for 2
+</div>
+<div>
+  <a href="#" data-toggle-anchor="example-2-3" data-toggle-group="example-2">Heading 3</a>
+</div>
+<div data-toggle="example-2-3">
+  This is the content for 3
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Custom Timing</h2>
+
+  <p>Customise the timing of toggles by adding <code>data-toggle-timing</code> attribute to your anchor.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-2" } do -%>
+<div>
+  <a href="#" data-toggle-anchor="example-speed-1" data-toggle-timing="100">Heading 1 (100)</a>
+</div>
+<div data-toggle="example-speed-1">
+  This is the content for 1
+</div>
+<div>
+  <a href="#" data-toggle-anchor="example-speed-2" data-toggle-timing="2000">Heading 2 (2000)</a>
+</div>
+<div data-toggle="example-speed-2">
+  This is the content for 2
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Change labels between show/hide</h2>
+
+  <p>Add <code>data-toggle-visible-label</code> to your anchor to swap the label.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-3" } do -%>
+<a href="#" data-toggle-anchor="example-3-1" data-toggle-visible-label="Hide">Show</a>
+<div data-toggle="example-3-1">
+  This is the hidden content
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Focus on field after toggling</h2>
+
+  <p>Add <code>data-toggle-focus</code> to focus on the first available input after toggling.</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-3" } do -%>
+<a href="#" data-toggle-anchor="example-focus" data-toggle-focus>Show</a>
+<div data-toggle="example-focus">
+  <input type="text" />
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Temporary Toggles</h2>
+
+  <p>Clicking away will hide the toggle when adding <code>data-toggle-temporary</code> and <code>data-toggle-temporary-anchor</code> attributes:</p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-3" } do -%>
+<a href="#" data-toggle-anchor="example-temporary" data-toggle-temporary-anchor>Show</a>
+<div data-toggle="example-temporary" data-toggle-temporary>
+  This will hide when you click away!
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Default Open</h2>
+
+  <p>You can default a toggle open by adding <code>data-toggle-default</code></p>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-3" } do -%>
+<a href="#" data-toggle-anchor="example-default" class="active">Show</a>
+<div data-toggle="example-default" data-toggle-default>
+  This is open by default! 
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">Add a bottom toggle which scroll back to the top when hiding</h2>
+
+  <%= render layout: "/layouts/styleguide/styleguide_feature", locals: { id: "example-4" } do -%>
+<a href="#" data-toggle-anchor="example-4" data-toggle-scroll data-toggle-scroll-master>This is the master toggle anchor</a>
+<div data-toggle="example-4">
+  This<br />
+  is<br />
+  some<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  really<br />
+  long<br />
+  content<br />
+  <a href="#" data-toggle-anchor="example-4" data-toggle-scroll>This is a slave anchor that will scroll to the top</a>
+</div>
+  <%- end -%>
+
+  <hr />
+
+  <h2 class="heading-two">JS events and triggers</h2>
+
+  <p>
+    Activate toggle anchor<br />
+    <code>$(".my-toggle-anchor").trigger("ornament:toggle-on");</code>
+  </p>
+
+  <p>
+    Deactivate toggle anchor<br />
+    <code>$(".my-toggle-anchor").trigger("ornament:toggle-off");</code>
+  </p>
+
+  <p>
+    Toggle toggle anchor<br />
+    <code>$(".my-toggle-anchor").trigger("ornament:toggle");</code>
+  </p>
+
+  <p>
+    Hide all toggle content blocks<br />
+    <code>$(document).trigger("ornament:toggle-all-off");</code>
+  </p>
+
+</div>

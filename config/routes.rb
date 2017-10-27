@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get '/styleguide/:action' => 'styleguide'
+  get '/styleguide' => 'styleguide#index'
+  resources :uploads do
+    post :image, on: :collection
+  end
   resources :documents, only: [:show]
   resources :images, only: [:show]
   resources :assets, only: [:show]

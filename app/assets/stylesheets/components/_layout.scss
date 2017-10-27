@@ -1,0 +1,64 @@
+$layout-background:             $background-color;
+$layout-breakpoint:             $breakpoint-header;
+$layout-main-padding-top:       $large-unit;
+$layout-main-padding-bottom:    $large-unit;
+
+html {
+  overflow-y: scroll;
+
+  &.html__tray-open {
+    overflow-y: hidden;
+  }
+}
+
+body {
+  background: $background-color;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.layout {
+  height: 100%;
+}
+
+.layout--content {
+  background: $layout-background;
+  min-height: 100%;
+  overflow: hidden;
+
+  @if $fixed-footer == true {
+    @include display-flex;
+    @include flex-direction(column);
+  }
+}
+
+.layout--positioner {
+  position: relative;
+
+  @if $fixed-footer == true {
+    @include display-flex;
+    @include flex-direction(column);
+    @include flex-grow(1);
+  }
+}
+
+.layout--container {
+  @include container-percentage;
+}
+
+.layout--main {
+  padding-top: $layout-main-padding-top;
+  padding-bottom: $layout-main-padding-bottom;
+
+  @if $fixed-footer == true {
+    @include flex-grow(1);
+  }
+}
+
+.layout--body {
+  @if $fixed-footer == true {
+    @include flex-grow(1);
+  }
+}

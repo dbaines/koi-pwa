@@ -1,0 +1,91 @@
+// Extend grunt-icon URIs in to psuedo elements
+@mixin grunticon($icon, $width, $height:$width, $psuedo:before) {
+  position: relative;
+
+  &:#{$psuedo} {
+    @extend .grunticon-#{$icon};
+    content: "";
+    width: $width;
+    height: $height;
+  }
+}
+
+/* 
+
+  Icon blocks are a block element with a centred icon inside it. 
+
+  To create a 44x44 block with a 12x12 icon centred inside:
+  @include icon-block(44px, 12px);
+
+  Each argument can also take a sass list to specify width/height.
+  To create a 44x60 block with a 22x30 icon:
+  @include icon-block((44px, 60px), (22px, 30px));
+  
+*/
+@mixin icon-block($block-size, $icon-size) {
+  @include display-flex;
+  @include align-items(center);
+  @include justify-content(center);
+
+  @if type-of($block-size) == "list" {
+    width: nth($block-size, 1);
+    height: nth($block-size, 2);
+  } @else {
+    width: $block-size;
+    height: $block-size;
+  }
+
+  svg {
+    display: block;
+    margin: 0 auto;
+
+    @if type-of($icon-size) == "list" {
+      width: nth($icon-size, 1);
+      height: nth($icon-size, 2);
+    } @else {
+      width: $icon-size;
+      height: $icon-size;
+    }
+  }
+}
+
+// Inline Icons
+// icons that sit next to some text
+// pass in true to set the icon to the right of the text
+@mixin icon-inline($right:false) {
+  &:before {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+
+    @if ($right == true) {
+      float: right;
+      margin-left: $xx-small-unit;
+    } @else {
+      margin-right: $xx-small-unit;
+    }
+  }
+}
+
+// Table Icons
+// [td with icon] [td with text]
+// used to vertically center a label against an icon
+// but with allowance for the label to extend past the icon
+@mixin icon-table($width:30px) {
+  display: table;
+  
+  .icon-table--icon,
+  .icon-table--label {
+    display: table-cell;
+  }
+
+  .icon-table--icon {
+    vertical-align: top;
+    width: $width;
+  }
+
+  .icon-table--label {
+    vertical-align: middle;
+    padding-left: $xxx-small-unit;
+  }
+}

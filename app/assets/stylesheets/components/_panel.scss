@@ -1,0 +1,106 @@
+$panel-border: $divider-color;
+
+// =========================================================================
+// Colour variation mixin
+// =========================================================================
+
+@mixin panel-color($background, $color:false) {
+  @extend .panel;
+  background: $background;
+
+  @if $color {
+    color: $color;
+
+    a {
+      @include color-link($color, $color);
+      @include decorate-link(underline, none);
+    }
+
+    .icon--stroke {
+      stroke: $color;
+    }
+
+    .icon--fill {
+      fill: $color;
+    }
+  }
+}
+
+// =========================================================================
+// Base panel
+// =========================================================================
+
+.panel {
+  @include border-radius($border-radius);
+  @include pie-clearfix;
+}
+
+.panel--padding-border {
+  border-top: 1px solid $panel-border;
+}
+
+// COLOUR VARIANTS
+
+.panel__primary {
+  @include panel-color($primary-color, $white);
+}
+
+.panel__passive {
+  @include panel-color($passive-color);
+}
+
+.panel__warning {
+  @include panel-color($notice-background, $foreground-color);
+}
+
+.panel__alert,
+.panel__error {
+  @include panel-color($error-background, $error-color);
+}
+
+.panel__alert {
+  @include panel-color($alert-background, $alert-color);
+}
+
+.panel__notice {
+  @include panel-color($notice-background, $notice-color);
+}
+
+.panel__success {
+  @include panel-color($success-background, $success-color);
+}
+
+// =========================================================================
+// Padding variations
+// =========================================================================
+
+.panel--padding {
+  padding: $panel-padding;
+}
+
+// =========================================================================
+// Border radius variations 
+// =========================================================================
+
+.panel__no-top-radius {
+  @include border-top-left-radius(0);
+  @include border-top-right-radius(0);
+}
+
+.panel__no-bottom-radius {
+  @include border-bottom-left-radius(0);
+  @include border-bottom-right-radius(0);
+}
+
+// =========================================================================
+// Panel spacing
+// =========================================================================
+
+.panel-spacing {
+  .panel + .panel,
+  .panel + .panel-spacer,
+  .panel-spacer + .panel-spacer,
+  .panel-spacer + .panel {
+    margin-top: $panel-spacing;
+  }
+}
