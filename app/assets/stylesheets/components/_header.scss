@@ -1,12 +1,12 @@
 .header {
   background: #ccc;
-  padding: $xx-small-unit;
+  padding: $xx-small-unit 0;
   @include pie-clearfix;
-  
+
   // Fix for choppy fixed positioning after a CSS transition has
   // happened in Chrome :/
   // http://stackoverflow.com/questions/20268962/fixed-attachment-background-image-flicker-disappear-in-chrome-when-coupled-with
-  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .header--menu {
@@ -20,7 +20,6 @@
 
 // Sticky Header
 .sticky-header {
-
   .csspositionsticky &.sticky-header__stuck {
     position: -webkit-sticky;
     position: -moz-sticky;

@@ -15,6 +15,7 @@ $navigation-padding: $xxxx-small-unit;
 }
 
 .navigation nav > ul > li > a,
+.navigation nav > ul > li > button,
 .navigation nav > .nav__dropdown-wrapper button {
   @include color-link($white, $white);
   @include decorate-link(none, none);
@@ -40,7 +41,8 @@ $navigation-padding: $xxxx-small-unit;
 }
 
 .navigation nav > .nav__dropdown-wrapper ul a,
-.navigation nav > ul ul a {
+.navigation nav > ul ul a,
+.navigation nav > ul ul button {
   @include color-link($white, $white);
   @include decorate-link(none, underline);
   padding-left: $navigation-padding;
