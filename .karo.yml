@@ -1,0 +1,14 @@
+production:
+  host: koiv2productionv2.engineyard.katalyst.com.au
+  user: deploy
+  path: /data/koi_pwa
+  commands:
+    client:
+      deploy: ey deploy -e koiv2productionv2
+staging:
+  host: koiv2staging.engineyard.katalyst.com.au
+  user: deploy
+  path: /data/koi_pwa
+  commands:
+    client:
+      deploy: ey deploy -e koiv2staging
