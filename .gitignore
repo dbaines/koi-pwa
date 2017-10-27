@@ -28,3 +28,6 @@ public/system/**/*
 
 # NPM packages
 /node_modules
+/public/packs
+/public/packs-test
+/node_modules
