@@ -43,6 +43,7 @@ gem 'htmlentities', '~> 4.3.4'
 # PWA dependancies
 gem 'webpacker', '~> 3.0'
 gem 'webpacker-react', "~> 0.3.2"
+gem 'foreman'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -189,6 +189,7 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (0.7.0)
     dragonfly (1.1.3)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -215,6 +216,9 @@ GEM
     ffi (1.9.18)
     figaro (1.1.1)
       thor (~> 0.14)
+    foreman (0.64.0)
+      dotenv (~> 0.7.0)
+      thor (>= 0.13.6)
     friendly_id (5.2.3)
       activerecord (>= 4.0.0)
     garb (0.9.8)
@@ -430,6 +434,7 @@ DEPENDENCIES
   compass-rails (~> 2.0.2)
   engineyard
   ey_config
+  foreman
   htmlentities (~> 4.3.4)
   i18n-active_record!
   jbuilder (~> 2.0)
