@@ -1,17 +1,30 @@
 Rails.application.routes.draw do
+
+  # Service Worker
+  get '/service-worker', to: "application#service_worker", format: :js
+
+  # Users 
   devise_for :users, controllers: {
     sessions: 'user/sessions'
   }
-  get '/styleguide/:action' => 'styleguide'
-  get '/styleguide' => 'styleguide#index'
+  
+  # Koi Assets and Uploads
   resources :uploads do
     post :image, on: :collection
   end
   resources :documents, only: [:show]
   resources :images, only: [:show]
   resources :assets, only: [:show]
+
+  # Koi pages and modules 
   resources :pages, only: [:index, :show], as: :koi_pages
+
+  # Homepage 
   root to: 'pages#index'
+
+  # Koi Namespace 
   mount Koi::Engine => "/admin", as: "koi_engine"
+
+  # Fallback pages routes 
   get "/:id"  => "pages#show", as: :page
 end
