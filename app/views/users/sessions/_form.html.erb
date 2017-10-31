@@ -1,0 +1,16 @@
+<% 
+  resource = User.new
+  resource_name = :user
+  devise_mapping = Devise.mappings[resource_name]
+%>
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), remote: true, html: { data: { user_form: "", devise_sessions_form: "" } }) do |f| %>
+  <div class="inputs">
+    <%= f.input :email, required: false, input_html: { autocomplete: "username email" } %>
+    <%= f.input :password, required: false, input_html: { autocomplete: "new-password" } %>
+    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+    <div>
+      <%= f.button :button, "Log in", class: "button" %>
+    </div>
+  </div>
+<% end %>

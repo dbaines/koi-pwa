@@ -61,7 +61,9 @@
 
       <div class="tray" data-tray>
         <nav aria-label="Global Navigation" role="navigation">
-          <%= render "layouts/styleguide/styleguide_navigation", heading_class: "sg-nav--heading" -%>
+          <ul>
+            <li>Mobile menu TBD</li>
+          </ul>
         </nav>
       </div>
 
@@ -69,7 +71,7 @@
 
         <header class="header" role="banner">
           <div class="layout--container">
-            header
+            <h1 class="header--logo heading-four">KoiPWA</h1>
             <button class="header--menu" aria-label="Toggle menu" data-tray-anchor>
               <%= icon("hamburger", fill: "#ffffff", width: 25, height: 23) -%>
             </button>
@@ -77,6 +79,21 @@
         </header>
 
         <div data-layout-positioner class="layout--positioner tray--open-overlay">
+          <div class="header--navigation navigation">
+            <div class="layout--container">
+              <nav>
+                <ul>
+                  <li><%= link_to "Koi Pages", koi_pages_path -%></li>
+                  <%- if user_signed_in? -%>
+                    <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { user_logout: "" } -%></li>
+                  <%- else -%>
+                    <li><%= link_to "Log In", new_user_session_path, data: { user_login: "" } -%></li>
+                    <li><%= link_to "Register", new_user_registration_path, data: { user_register: "" } -%></li>
+                  <%- end -%>
+                </ul>
+              </nav>
+            </div>
+          </div>
           <%= render "/shared/oldie" -%>
           <%= yield :above_layout -%>
           <%= render "/shared/flash" -%>
@@ -107,6 +124,21 @@
       <div data-ornament-icon="chevron-left"><%= icon("chevron_left") -%></div>
       <div data-ornament-icon="chevron-right"><%= icon("chevron_right") -%></div>
       <div data-ornament-icon="close"><%= icon("close") -%></div>
+    </div>
+
+    <div data-credentials-modals>
+      <%= render layout: "shared/inline_lightbox", locals: { inline_id: "user-login" } do -%>
+        <div class="panel--padding spacing">
+          <h2 class="heading-four">Login to KoiPWA</h2>
+          <%= render "/users/sessions/form" -%>
+        </div>
+      <%- end -%>
+      <%= render layout: "shared/inline_lightbox", locals: { inline_id: "user-register" } do -%>
+        <div class="panel--padding spacing">
+          <h2 class="heading-four">Register new user account for KoiPWA</h2>
+          <%= render "/users/registrations/form" -%>
+        </div>
+      <%- end -%>
     </div>
 
   </body>

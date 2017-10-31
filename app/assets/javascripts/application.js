@@ -1,6 +1,6 @@
 // =========================================================================
 // Ornament Core
-// Set up Ornament lifecycle events 
+// Set up Ornament lifecycle events
 // =========================================================================
 
 //= require ornament/core
@@ -8,7 +8,7 @@
 // =========================================================================
 // Ornament Utilities and Helpers
 // Everything here should be accessible through the Ornament.Utilities
-// namespace 
+// namespace
 // =========================================================================
 
 //= require ornament/utilities/asset-preloader
@@ -26,10 +26,11 @@
 //= require ornament/utilities/uploader-helpers
 
 // =========================================================================
-// Website Components 
+// Website Components
 // =========================================================================
 
 //= require components/analytics
+//= require components/credentials
 //= require components/carousel
 //= require components/embed
 //= require components/drilldown

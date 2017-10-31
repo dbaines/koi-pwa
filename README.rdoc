@@ -5,29 +5,21 @@ The aim of this project is to create a playground to implement best practicies f
 Some of the samples we'll be creating are:
 
 1. Webpacker workflow for writing in ES2016+
+1. Using credentials API to login to a devise user account with form fallback 
+1. WebShare API with fallback 
 1. Offline-first application frame 
+1. Geolocation workflows 
 1. Skeleton elements and loading in content from Koi endpoint via AJAX 
 1. Building a service worker using rails
-  - Add to homescreen with custom up-sell interface 
   - Notifications 
-1. Using credentials API to login to a devise user account with form fallback 
+  - Workbox integration 
 
-## Webpacker
-
-Gems required:
-1. [Webpacker](https://github.com/rails/webpacker)
-1. [Webpacker-React](https://github.com/renchap/webpacker-react)
-
-Webpacker allows us to write javascript using ES2016 and beyond. Webpacker-React allows us to easily add react components to our pages and pass in data from our view using view helpers.  
-
-This app comes with a **Procfile** that lets you run the webpacker dev server and the rails server at the same time:
-
-```
-foreman start -f Procfile 
-```
-
-## Known issues 
+# Known issues 
 
 Yarn 1.1.0 and Windows 10 WSL 17025 ("Fall Creators Update") and below all experience issues installing yarn dependancies:  
 https://github.com/Microsoft/WSL/issues/2448  
 
+
+# References
+
+1. [Caching images by function](https://youtu.be/goafiwzhKMI?t=1553) - Video: Kickstarting Your Journey to Progressive Web Apps (Chrome Dev Summit 2017)
