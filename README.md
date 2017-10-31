@@ -1,4 +1,4 @@
-== Koi PWA test app
+# Koi PWA test app
 
 The aim of this project is to create a playground to implement best practicies for PWA technologies. 
 
