@@ -2,7 +2,7 @@
   "dependencies": {
     "@rails/webpacker": "^3.0.2",
     "coffeescript": "1.12.7",
-    "sw-toolbox": "^3.6.0"
+    "workbox-sw": "^2.1.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.9.3"
