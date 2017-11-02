@@ -56,4 +56,5 @@
 //= require components/tooltip
 //= require components/transition-toggle
 //= require components/tray
+//= require components/webshare
 //= require components/wysiwyg-helpers

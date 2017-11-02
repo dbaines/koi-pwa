@@ -3,6 +3,9 @@
 Credentials API implementation
 https://developers.google.com/web/fundamentals/security/credential-management/
 
+Most of this should be boilerplate, but the callbacks section is 
+likely the place to customise these features. 
+
 ===================================================================== */
 
 "use strict";
@@ -61,21 +64,38 @@ https://developers.google.com/web/fundamentals/security/credential-management/
       };
     },
 
+    
+    // =========================================================================
+    // Callbacks
     // Custom fallback functions to do UI stuff when certain
     // milstones in the workflow are met
+    // Hint: Turn on debug mode above to see these callbacks fired in 
+    // your console. 
+    // =========================================================================
+
     callbacks: {
+      // The user has pressed the login button and has been 
+      // presented with the list of accounts to choose from, but
+      // has not yet made a selection. 
       waitingForUserInput: function() {
         Creds.log("Waiting for user input");
       },
-      waitingForLoginResponse: function() {
-        Creds.log("Waiting for Login Response");
-      },
+      // The user has made a selection from the account list, or 
+      // has cancelled the request. 
       waitingForUserInputComplete: function() {
         Creds.log("Waiting for user complete");
       },
+      // The user has made a selection and the login request has
+      // been sent to the server, but the response has not yet
+      // been received. 
+      waitingForLoginResponse: function() {
+        Creds.log("Waiting for Login Response");
+      },
+      // The login reponse has been received by the browser. 
       waitingForUserLoginResponseComplete: function() {
         Creds.log("Waiting for login response complete");
       },
+      // The login response was bad 
       loginFailed: function(context, submissionType) {
         Creds.log("Login failed");
         context = context || "login";
@@ -88,17 +108,24 @@ https://developers.google.com/web/fundamentals/security/credential-management/
           }
         }
       },
+      // The login response was good 
       loginSuccess: function() {
         Creds.log("Login success");
         window.location.reload();
       },
+      // Generic device unsupported function when 
+      // attempting to call Creds.getCredentials() directly.
+      // This should theoretically never happen. 
       deviceUnsupported: function() {
         Creds.log("Device unsupported");
       },
+      // No account was selected from the account list or 
+      // no account was autologgedin 
       noAccountSelected: function() {
         Creds.log("No account was selected");
         Creds.loginFallback();
       },
+      // Autologin failed 
       autoLoginFailed: function() {
         Creds.log("Autologin failed, possibly couldn't determine which account to use.");
       }

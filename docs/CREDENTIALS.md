@@ -13,3 +13,7 @@ This is made of several features:
 * Generated and customised devise controllers - `app/controllers/user`
 * Ornament Credentials component - `app/assets/javascripts/credentials.js`
 * Lightbox implementation in the global template - `app/views/layouts/global.html.erb`
+
+## References
+
+1. [Web Fundamentals - The Credentials Management API](https://developers.google.com/web/fundamentals/security/credential-management/)
