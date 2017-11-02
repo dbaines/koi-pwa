@@ -1,0 +1,11 @@
+{
+  "short_name": "KoiPWA",
+  "name": "KoiPWA Sandbox App",
+  "icons": {
+
+  },
+  "start_url": "\/?installed=true",
+  "theme_color": "#4b9dd0",
+  "display": "standalone",
+  "background": "#ffffff"
+}
