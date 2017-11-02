@@ -53,7 +53,12 @@ These can be customised with data attributes:
           console.log("[WEBSHARE]", error);
         });
       } else {
-
+        Ornament.C.Lightbox.openLightbox({
+          mainClass: Ornament.C.Lightbox.defaults.mainClass += " lightbox__small",
+          items: {
+            src: "#share"
+          }
+        });
       }
     },
 
@@ -61,7 +66,7 @@ These can be customised with data attributes:
       WebShare.enabled = "share" in navigator;
       WebShare.$shares = Utils.findData(WebShare.selector, false, false, false);
       WebShare.$shares.forEach(function($share){
-        Utils.bindOnce($share, WebShare.onShare);
+        Utils.bindOnce($share, "click", WebShare.onShare);
       })
     }
   }

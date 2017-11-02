@@ -119,6 +119,11 @@
           <footer class="footer" role="contentinfo">
             <div class="layout--container">
               <button data-webshare>Share this page</button>
+              <%= render layout: "shared/inline_lightbox", locals: { inline_id: "share" } do -%>
+                <div class="panel--padding spacing">
+                  Generic share fallback
+                </div>
+              <%- end -%>
             </div>
           </footer>
         </div>

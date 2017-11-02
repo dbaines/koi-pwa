@@ -158,6 +158,7 @@ likely the place to customise these features.
     // Open login modal with a simple function
     openLoginModal: function() {
       Ornament.C.Lightbox.openLightbox({
+        mainClass: Ornament.C.Lightbox.defaults.mainClass += " lightbox__small",
         items: {
           src: Creds.modals.login
         }
@@ -167,6 +168,7 @@ likely the place to customise these features.
     // Open register modal with a simple function
     openRegisterModal: function() {
       Ornament.C.Lightbox.openLightbox({
+        mainClass: Ornament.C.Lightbox.defaults.mainClass += " lightbox__small",
         items: {
           src: Creds.modals.register
         }
