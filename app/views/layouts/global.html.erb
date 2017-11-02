@@ -47,6 +47,14 @@
     <%- koi_scripts = get_koi_site_setting("site.head_scripts") -%>
     <%= koi_scripts if koi_scripts -%>
 
+    <% if user_signed_in? %>
+      <script>
+        Ornament.User = {
+          id: <%= current_user.id %>
+        }
+      </script>
+    <% end %>
+
   </head>
 
   <body class="styleguide <%= yield :body_class -%>"> 
@@ -72,7 +80,7 @@
         <header class="header" role="banner">
           <div class="layout--container">
             <h1 class="header--logo heading-four">
-              <%= link_to "KoiPWA", root_path -%>
+              <%= link_to "KoiPWA Sandbox", root_path -%>
             </h1>
             <button class="header--menu" aria-label="Toggle menu" data-tray-anchor>
               <%= icon("hamburger", fill: "#ffffff", width: 25, height: 23) -%>

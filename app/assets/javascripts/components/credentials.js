@@ -1,6 +1,7 @@
 /* =====================================================================
 
 Credentials API implementation
+https://developers.google.com/web/fundamentals/security/credential-management/
 
 ===================================================================== */
 
@@ -369,6 +370,17 @@ Credentials API implementation
     },
 
     // =========================================================================
+    // Logout 
+    // =========================================================================
+
+    onClickLogout: function(){
+      if(Creds.supported) {
+        Creds.log("Logging out");
+        navigator.credentials.preventSilentAccess();
+      }
+    },
+
+    // =========================================================================
     // Init
     // =========================================================================
 
@@ -392,10 +404,19 @@ Credentials API implementation
         false,
         false
       );
+      Creds.$logoutButtons = Utils.findData(
+        Creds.dataSelectors.logout,
+        false,
+        false,
+        false
+      );
       Creds.$userForms = Utils.findData(Creds.dataSelectors.forms, false, false, false);
       // Onclick handlers
       Creds.$loginButtons.forEach(function($loginButton) {
         Utils.bindOnce($loginButton, "click", Creds.onClickLogin);
+      });
+      Creds.$logoutButtons.forEach(function($logoutButton) {
+        Utils.bindOnce($logoutButton, "click", Creds.onClickLogout);
       });
       Creds.$registerButtons.forEach(function($registerButton) {
         Utils.bindOnce($registerButton, "click", Creds.onClickRegister);
@@ -404,7 +425,7 @@ Credentials API implementation
         Utils.bindOnce($userForm, "submit", Creds.onFormSubmit);
       });
       // Attempt autologin if supported
-      if (Creds.supported) {
+      if (Creds.supported && !Ornament.User) {
         Creds.autoLogin();
       }
     }
