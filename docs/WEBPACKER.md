@@ -11,3 +11,8 @@ This app comes with a **Procfile** that lets you run the webpacker dev server an
 ```
 foreman start -f Procfile 
 ```
+
+# Known issues 
+
+Yarn 1.1.0 and Windows 10 WSL 17025 ("Fall Creators Update") and below all experience issues installing yarn dependancies:  
+https://github.com/Microsoft/WSL/issues/2448  
