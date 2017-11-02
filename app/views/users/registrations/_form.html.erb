@@ -1,10 +1,11 @@
 <% 
-  resource = User.new
-  resource_name = :user
+  resource ||= User.new
+  resource_name ||= :user
   edit_mode ||= false 
+  submission_type ||= "modal"
 %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { user_form: "", devise_registration_form: "" } }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { data: { devise_registration_form: "" } }) do |f| %>
   <%= f.error_notification %>
 
   <div class="inputs">

@@ -75,13 +75,16 @@ Credentials API implementation
       waitingForUserLoginResponseComplete: function() {
         Creds.log("Waiting for login response complete");
       },
-      loginFailed: function(context) {
+      loginFailed: function(context, submissionType) {
         Creds.log("Login failed");
         context = context || "login";
-        if (context === "register") {
-          Creds.registerFallback();
-        } else {
-          Creds.loginFallback();
+        submissionType = submissionType || "modal";
+        if(submissionType === "modal") {
+          if (context === "register") {
+            Creds.registerFallback();
+          } else {
+            Creds.loginFallback();
+          }
         }
       },
       loginSuccess: function() {
@@ -308,6 +311,11 @@ Credentials API implementation
       if (event.target.hasAttribute("data-devise-registration-form")) {
         context = "register";
       }
+      var submissionType = "modal";
+      var customSubmissionType = event.target.getAttribute(Creds.dataSelectors.forms);
+      if (customSubmissionType) {
+        submissionType = customSubmissionType;
+      }
       // Stop the form from submitting
       event.preventDefault();
       Creds.log("Attempting to save credentials");
@@ -344,7 +352,7 @@ Credentials API implementation
           }
         })
         .catch(function(error) {
-          Creds.callbacks.loginFailed(context);
+          Creds.callbacks.loginFailed(context, submissionType);
         });
     },
 
@@ -393,7 +401,7 @@ Credentials API implementation
         Utils.bindOnce($registerButton, "click", Creds.onClickRegister);
       });
       Creds.$userForms.forEach(function($userForm) {
-        // Utils.bindOnce($userForm, "submit", Creds.onFormSubmit);
+        Utils.bindOnce($userForm, "submit", Creds.onFormSubmit);
       });
       // Attempt autologin if supported
       if (Creds.supported) {
