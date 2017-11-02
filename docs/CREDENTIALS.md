@@ -1,11 +1,11 @@
 # Credentials API
 
-The objectives of the credentials API are:
+The credentials API can be used to allow one-click login using stored device accounts. 
+For example in Chrome you can click the login button and be presented with accounts that you have saved. Clicking on the account will log you in.  
 
-* Allow the user to sign in with a system account 
-* If no system account found, sign up via a modal 
-* Allow fallback pages for sign in / sign up workflows outside of modal / API 
-* On successful login, save credentials for autologin in future 
+We can enhance this behaviour by listening for cancels or bad logins to then fallback to a login form in a modal. The login form can use an AJAX form to even further enhance the login experience. 
+
+When the user has successfully logged in, the browser will remember that they have chosen to login via this account and will continuily log them in every time they visit the site until the user opts to specifically log out. 
 
 This is made of several features:
 
