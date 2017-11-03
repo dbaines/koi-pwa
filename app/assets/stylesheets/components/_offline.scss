@@ -1,0 +1,7 @@
+.offline-notification {
+  display: none;
+
+  .body__offline & {
+    display: block;
+  }
+}

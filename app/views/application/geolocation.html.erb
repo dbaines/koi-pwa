@@ -1,0 +1,16 @@
+<%- content_for :title, "Geolocation" -%>
+
+<%- content_for :scripts do -%>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjgOvjmIVHFO-1IVSYWeZN-1Yp_MkjeW0">
+  </script>
+<%- end -%>
+
+<button data-geolocate>Geolocate</button>
+
+<div data-map>
+  <div data-map-pin="-34.921619,138.599257" data-map-pin-title="This is a pin!"></div>
+</div>
+
+<div data-geolocate-nudge style="display: none;">
+  This is a nudge message, waiting for the user to accept the prompt.
+</div>

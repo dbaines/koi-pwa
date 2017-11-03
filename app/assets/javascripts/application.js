@@ -42,10 +42,12 @@
 //= require components/form-password-revealer
 //= require components/form-password-score
 //= require components/flexible-input
+//= require components/geolocation
 //= require components/kat-image-upload
 //= require components/lightbox
 //= require components/map
 //= require components/menu-with-more
+//= require components/offline
 //= require components/pagination-helper
 //= require components/read-more
 //= require components/scroll-to

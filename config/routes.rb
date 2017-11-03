@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   # Service Worker
   get '/service-worker', to: "application#service_worker", format: :js
 
+  # Static routes
+  get '/geolocation', to: "application#geolocation", as: :geolocation
+
   # Users 
   devise_for :users, controllers: {
     sessions: 'user/sessions'

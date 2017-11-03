@@ -7,8 +7,8 @@ Some of the features are details in their own documents:
 1. [Webpacker workflow for writing in ES2016+](docs/WEBPACKER.md)  
 1. [Using credentials API to login to a devise user account with form fallback](docs/CREDENTIALS.md)  
 1. [WebShare API with fallback](docs/WEBSHARE.md)  
-1. [ServiceWorker](docs/SERVICEWORKER.md)
-1. Offline-first application frame 
+1. [ServiceWorker](docs/SERVICEWORKER.md)  
+1. [Offline Support](docs/OFFLINE.md)  
 1. Geolocation workflows 
 1. Skeleton elements and loading in content from Koi endpoint via AJAX 
 

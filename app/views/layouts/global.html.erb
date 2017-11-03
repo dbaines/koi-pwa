@@ -89,11 +89,17 @@
         </header>
 
         <div data-layout-positioner class="layout--positioner tray--open-overlay">
+          <div class="offline-notification panel__flash panel__alert" data-offline-notification>
+            <div class="layout--container">
+              <strong>You are currently offline.</strong>
+            </div>
+          </div>
           <div class="header--navigation navigation">
             <div class="layout--container">
               <nav>
                 <ul>
                   <li><%= link_to "Koi Pages", koi_pages_path -%></li>
+                  <li><%= link_to "Geo", geolocation_path %></li>
                   <%- if user_signed_in? -%>
                     <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { user_logout: "" } -%></li>
                   <%- else -%>
