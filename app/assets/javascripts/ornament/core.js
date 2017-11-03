@@ -114,6 +114,24 @@ Ornament.initComponents = function(components) {
 }
 
 // =========================================================================
+// Service worker 
+// =========================================================================
+
+Ornament.registerServiceWorker = function(filename){
+  filename = filename || "/service-worker.js";
+  if(Ornament.features.serviceWorker) {
+    navigator.serviceWorker.register(filename)
+      .then(function(registration){
+        Ornament.log("ServiceWorker Registered with scope: ", registration.scope);
+        Ornament.ServiceWorker = registration;
+      })
+      .catch(function(error) {
+        Ornament.log("Service Worker registration failed", error);
+      });
+  }
+}
+
+// =========================================================================
 // Lifecycle and State 
 // =========================================================================
 
@@ -168,9 +186,11 @@ Ornament.beforeTurbolinksCache = function(callback){
 if(Ornament.features.turbolinks) {
   document.addEventListener("turbolinks:load", function(event) {
     Ornament.refresh();
+    Ornament.registerServiceWorker();
   });
 } else { 
   document.addEventListener("DOMContentLoaded", function(event){
     Ornament.refresh();
+    Ornament.registerServiceWorker();
   });
 }

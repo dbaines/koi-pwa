@@ -1,4 +1,77 @@
-<%
-  ## Service Worker
-%>
+<%-
 
+  # Service Worker 
+  # using Workbox toolset for caching strategies:
+  # https://developers.google.com/web/tools/workbox/examples
+
+  assetCache = {
+    name: "asset-cache",
+    revision: "1"
+  }
+
+  dataCache = {
+    name: "data-cache",
+    revision: "1"
+  }
+
+  cacheGoogleFonts = true
+  genericImageCache = true
+  disableCachingInDevelopment = false 
+
+-%>
+
+<%# Load in the workbox library %>
+importScripts('https://unpkg.com/workbox-sw@2.0.3/build/importScripts/workbox-sw.dev.v2.0.3.js');
+const workbox = new WorkboxSW();
+
+<%# Optionally disable caching entirely during development %>
+<% unless Rails.env.development? && disableCachingInDevelopment %>
+
+  <%# Cache GoogleFonts responses locally %>
+  <% if cacheGoogleFonts %>
+    workbox.router.registerRoute('https://fonts.googleapis.com/(.*)', 
+      workbox.strategies.cacheFirst({
+        cacheName: "googleapis",
+        cacheExpiration: {
+          maxEntries: 20,
+          maxAgeSeconds: 30 * 24 * 60 * 60
+        },
+        cacheableResponse: { statuses: [0, 200] }
+      })
+    );
+  <% end %>
+
+  <%# Generically cache images %>
+  <% if genericImageCache %>
+    workbox.router.registerRoute(/\.(?:png|gif|jpg)$/,
+      workbox.strategies.cacheFirst({
+        cacheName: "images-cache_<%= assetCache[:revision] -%>",
+        cacheExpiration: {
+          maxEntries: 50
+        }
+      })
+    );
+  <% end %>
+
+<% end %>
+
+<%# Notification support %>
+self.addEventListener("notificationclick", e => {
+  let notification = e.notification;
+  let primaryKey = notification.data.primaryKey;
+  let action = e.action;
+  // console.log(primaryKey, action);
+
+  switch(action) {
+    case "close":
+      notification.close();
+      break;
+    case "geolocation":
+      console.log("Opening geolocation");
+      clients.openWindow("/geolocation");
+      notification.close();
+      break;
+    default:
+      notification.close();
+  }
+});

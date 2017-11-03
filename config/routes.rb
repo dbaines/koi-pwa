@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # Static routes
   get '/geolocation', to: "application#geolocation", as: :geolocation
+  get '/notifications', to: "application#notifications", as: :notifications
 
   # Users 
   devise_for :users, controllers: {

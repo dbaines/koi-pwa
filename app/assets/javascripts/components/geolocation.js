@@ -42,21 +42,25 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
 
     onGeolocate: function(event){
       event.preventDefault();
+      var targetElement = event.currentTarget || event.target;
       Geolocation.timeout = setTimeout(Geolocation.showNudgeBanner, 5000);
-      navigator.geolocation.getCurrentPosition(function(){
-        Geolocation.onGeolocateSuccess(position, event.currentTarget);
-      }, function(){
-        Geolocation.onGeolocateFailed(error, event.currentTarget);
+      navigator.geolocation.getCurrentPosition(function(position){
+        Geolocation.onGeolocateSuccess(position, targetElement);
+      }, function(error){
+        Geolocation.onGeolocateFailed(error, targetElement);
       });
     },
 
     onGeolocateSuccess: function(position, element){
       Geolocation.hideNudgeBanner();
-      clearTimeout(Geolocation.$nudgeBanner);
+      clearTimeout(Geolocation.timeout);
       Geolocation.buttonWaitingForLocation(element);
+      Geolocation.updateMapWithLocation(position);
     },
 
     onGeolocateFailed: function(error, element){
+      Geolocation.hideNudgeBanner();
+      clearTimeout(Geolocation.timeout);
       switch(error.code) {
         case error.TIMEOUT:
           // The user didn't accept the prompt 
