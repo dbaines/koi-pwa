@@ -266,6 +266,16 @@
         google.maps.event.trigger(map, "resize");
         map.setCenter(center);
       });
+
+      // Geolocation API event after prompt
+      if($mapContainer.is("[data-map-geolocatable]")) {
+        if($mapContainer.attr("data-map-geolocatable") === "document") {
+          $(document).on("ornament:geolocation:success", function(event, position) {
+            var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            map.panTo(latLng);
+          });
+        }
+      }
     }
 
     // Map Creation

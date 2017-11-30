@@ -20,3 +20,16 @@
     stroke: $white;
   }
 }
+
+.icon-spinner {
+  @include animation(spinner-rotate 2s linear infinite);
+}
+
+@include keyframes(spinner-rotate) {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(359deg);
+  }
+}

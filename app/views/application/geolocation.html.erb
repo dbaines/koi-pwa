@@ -5,12 +5,32 @@
   </script>
 <%- end -%>
 
-<button data-geolocate>Geolocate</button>
+<button class="button" data-geolocate-request>Geolocate</button>
 
-<div data-geolocate-nudge style="display: none;">
-  Please allow geolocation permissions to geolocate.
-</div>
-
-<div data-map>
+<div data-map data-map-geolocatable="document">
   <div data-map-pin="-34.921619,138.599257" data-map-pin-title="This is a pin!"></div>
 </div>
+
+<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-request" } do -%>
+  <div class="panel--padding spacing">
+    <p>We need permission to access your location. Please click the geolocate button below and accept the permission request.</p>
+    <p>If you decline the request we will not be able to access your location.</p>
+  </div>
+  <div class="panel--padding panel--padding-border" data-geolocate-nudge style="display: none;">
+    Please allow geolocation permissions to continue.
+  </div>
+  <div class="panel--padding panel--padding-border align__center spacing-xxx-tight">
+    <button class="button button__full" data-geolocate>Sounds good!</button>
+    <button data-lightbox-close>Nah</button>
+  </div>
+<%- end -%>
+
+<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-denied" } do -%>
+  <div class="panel--padding spacing">
+    <p>Sorry, you've denied permission to your location information.</p>
+    <p>Please go in to your browser settings and change provided permissions if you want to use this feature.</p>
+  </div>
+  <div class="panel--padding panel--padding-border align__center spacing-xxx-tight">
+    <button class="button button__full" data-lightbox-close>Okay</button>
+  </div>
+<%- end -%>

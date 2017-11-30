@@ -192,7 +192,19 @@
       // });
       openLightbox: function(settings) {
         var options = $.extend(true, {}, Lightbox.defaults, settings);
-        $.magnificPopup.open(options);
+
+        // Check if there's an existing modal
+        var currentModal = $.magnificPopup.instance.currItem;
+        if (currentModal) {
+          var previousModal = currentModal.src;
+          $.magnificPopup.close();
+
+          setTimeout(function() {
+            $.magnificPopup.open(options);
+          }, Lightbox.defaults.removalDelay);
+        } else {
+          $.magnificPopup.open(options);
+        }
       },
 
       // Close any open modals

@@ -13,11 +13,12 @@
 // These can be loaded in any order
 
 //= require libs/markercluster
-// require libs/velocity
+//= require libs/store
 //= require libs/jquery.jcrop
 //= require libs/what-input
 //= require libs/flying-focus
 // require libs/youtube-wmode
+// require libs/velocity
 
 // =========================================================================
 // Polyfills
