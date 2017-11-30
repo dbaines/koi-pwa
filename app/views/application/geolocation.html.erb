@@ -7,13 +7,11 @@
 
 <button class="button" data-geolocate-request>Geolocate</button>
 
-<div data-map data-map-geolocatable="document">
-  <div data-map-pin="-34.921619,138.599257" data-map-pin-title="This is a pin!"></div>
-</div>
+<div data-map data-map-geolocatable="document" data-map-position="-34.924548,138.594808"></div>
 
 <%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-request" } do -%>
   <div class="panel--padding spacing">
-    <p>We need permission to access your location. Please click the geolocate button below and accept the permission request.</p>
+    <p>We need permission to access your location. Please click the button below and accept the permission request.</p>
     <p>If you decline the request we will not be able to access your location.</p>
   </div>
   <div class="panel--padding panel--padding-border" data-geolocate-nudge style="display: none;">

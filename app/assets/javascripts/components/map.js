@@ -125,10 +125,19 @@
 
     var buildMap = function($mapContainer, mapIteration, userLocation) {
 
+      var position = false;
+      var firstLatLng = false;
       var $mapPinElements = $mapContainer.find("[data-map-pin]");
-      var firstLatLng = getGoogleLocationFromPin($mapPinElements.first(), map, $mapContainer.is("[data-map-cluster]"));
       var numberOfPins = $mapPinElements.length;
       var userLocation = userLocation || false;
+
+      if($mapPinElements.length) {
+        position = getGoogleLocationFromPin($mapPinElements.first(), map, $mapContainer.is("[data-map-cluster]"));
+      }
+
+      if(userLocation) {
+        position = userLocation;
+      }
 
       // Add a map canvas to the map container
       var $map = $("<div class='map-canvas' id='map-canvas-"+mapIteration+"' />");
@@ -163,12 +172,9 @@
         });
       }
 
-      // Get latlong
-      var defaultLocation = userLocation || firstLatLng;
-
       // Map Options
       var mapOptions = {
-        center: defaultLocation,
+        center: position,
         zoom: mapDefaultZoom
       }
 
