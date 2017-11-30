@@ -10,7 +10,7 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
 (function (document, window, Orn, Utils) {
 
   var Geolocation = {
-
+    
     dataSelectors: {
       requestButton: "data-geolocate-request",
       buttons: "data-geolocate",
@@ -24,7 +24,8 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
 
     modalIds: {
       request: "#geolocation-request",
-      denied: "#geolocation-denied"
+      denied: "#geolocation-denied",
+      unavailable: "#geolocation-unavailable"
     },
 
     // Class to apply to buttons when waiting for response
@@ -76,7 +77,13 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
 
     onGeolocate: function(event){
       event.preventDefault();
+      if(!Ornament.features.geolocation) {
+        Geolocation.openUnavailableModal("Geolocation is not supported on this device.");
+        return;
+      }
       var targetElement = event.currentTarget || event.target;
+      // Don't fire another Geolocation request if there is already
+      // one pending
       if(targetElement.classList.contains(Geolocation.waitingForLocationClass)) {
         return;
       }
@@ -136,7 +143,7 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
           // state so we can update the permissions to reflect that
           Geolocation.updatePermission("granted");
           // Feedback to the user that we couldn't get their location
-          alert("There was an error getting your location detials.");
+          Geolocation.openUnavailableModal("Sorry, there was an error getting your location: " + error.message);
           // Close the modal
           Orn.C.Lightbox.closeLightbox();
           // Trigger a generic error event on the button
@@ -193,10 +200,29 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
       });
     },
 
+    // Open the modal explaining to the user that the location
+    // information is unavaiable
+    openUnavailableModal: function(message){
+      message = message || false;
+      if(message) {
+        $("[data-geolocation-error-unavailable]").html(message);
+      }
+      Orn.C.Lightbox.openLightbox({
+        mainClass: Orn.C.Lightbox.defaults.mainClass += " lightbox__small",
+        items: {
+          src: Geolocation.modalIds.unavailable
+        }
+      });
+    },
+
     // Check if user has already given permission
     // If they have, bubble on to the geolocate event
     // If they haven't, show the geolocation modal
     requestPermission: function(event){
+      if(!Ornament.features.geolocation) {
+        Geolocation.openUnavailableModal("Geolocation is not supported on this device.");
+        return;
+      }
       if(Geolocation.permission === "granted") {
         Geolocation.onGeolocate(event);
       } else if(Geolocation.permission === "denied") {

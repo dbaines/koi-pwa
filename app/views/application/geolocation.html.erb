@@ -9,8 +9,9 @@
 
 <div data-map data-map-geolocatable="document" data-map-position="-34.924548,138.594808"></div>
 
-<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-request" } do -%>
-  <div class="panel--padding spacing">
+<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-request", lightbox_content_class: "" } do -%>
+  <div class="panel--padding content-spacing-classes">
+    <h2 class="heading-six">Location Permission Required</h2>
     <p>We need permission to access your location. Please click the button below and accept the permission request.</p>
     <p>If you decline the request we will not be able to access your location.</p>
   </div>
@@ -23,10 +24,21 @@
   </div>
 <%- end -%>
 
-<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-denied" } do -%>
-  <div class="panel--padding spacing">
+<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-denied", lightbox_content_class: "" } do -%>
+  <div class="panel--padding content-spacing-classes">
+    <h2 class="heading-six">Location Permission Denied</h2>
     <p>Sorry, you've denied permission to your location information.</p>
     <p>Please go in to your browser settings and change provided permissions if you want to use this feature.</p>
+  </div>
+  <div class="panel--padding panel--padding-border align__center spacing-xxx-tight">
+    <button class="button button__full" data-lightbox-close>Okay</button>
+  </div>
+<%- end -%>
+
+<%= render layout: "shared/inline_lightbox", locals: { inline_id: "geolocation-unavailable", lightbox_content_class: "" } do -%>
+  <div class="panel--padding content-spacing-classes">
+    <h2 class="heading-six">Location Unavailable</h2>
+    <p data-geolocation-error-unavailable>Sorry, there was an error getting your location.</p>
   </div>
   <div class="panel--padding panel--padding-border align__center spacing-xxx-tight">
     <button class="button button__full" data-lightbox-close>Okay</button>
