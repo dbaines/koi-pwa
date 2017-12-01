@@ -11,7 +11,7 @@ Some of the features are details in their own documents:
     - Caching
     - Notifcations 
 1. [Offline Support](docs/OFFLINE.md)  
-1. Geolocation workflows 
+1. [Geolocation workflows](docs/GEOLOCATION.md)  
 1. Skeleton elements and loading in content from Koi endpoint via AJAX 
 
 # Notes
