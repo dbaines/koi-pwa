@@ -144,8 +144,6 @@ https://developers.google.com/web/fundamentals/native-hardware/user-location/
           Geolocation.updatePermission("granted");
           // Feedback to the user that we couldn't get their location
           Geolocation.openUnavailableModal("Sorry, there was an error getting your location: " + error.message);
-          // Close the modal
-          Orn.C.Lightbox.closeLightbox();
           // Trigger a generic error event on the button
           // and a specific unavailable event
           $(element).trigger("ornament:geolocation:error");
