@@ -10,13 +10,10 @@
     enhancedSelector: ".form--enhanced input",
 
     init: function(){
-      if(Ornament.features.ie8) {
-        $("." + FormsEnhanced.enhancedContainerClass).removeClass(FormsEnhanced.enhancedContainerClass);
-      } else {
-        $(FormsEnhanced.enhancedSelector).not("." + FormsEnhanced.enhancedClass).each(function(){
-          $(this).addClass(FormsEnhanced.enhancedClass).after(FormsEnhanced.enhancedElement);
-        });
-      }
+      $(FormsEnhanced.enhancedSelector).not("." + FormsEnhanced.enhancedClass).each(function(){
+        var $element = $(this);
+        $element.addClass(FormsEnhanced.enhancedClass).after(FormsEnhanced.enhancedElement);
+      });
     }
   }
   

@@ -93,7 +93,7 @@ Ornament.registerComponent = function(componentName, componentObject) {
 // This will call myComponent.init();
 Ornament.initComponent = function(componentName) {
   var component = Ornament.C[componentName];
-  if(component.init) {
+  if(component && component.init) {
     Ornament.log("Initialising component: " + componentName);
     component.init();
   } else {
@@ -107,10 +107,10 @@ Ornament.initComponent = function(componentName) {
 // If there are no arguments passed, all compnents in Ornament.C will
 // be initialised.
 Ornament.initComponents = function(components) {
-  components = components || Ornament.Components;
-  for(var component in components) {
+  components = components || Object.keys(Ornament.Components);
+  components.map(function(component) {
     Ornament.initComponent(component);
-  }
+  });
 }
 
 // =========================================================================

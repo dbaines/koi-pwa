@@ -47,6 +47,7 @@
 //= require components/lightbox
 //= require components/map
 //= require components/menu-with-more
+//= require components/navigation
 //= require components/notification
 //= require components/offline
 //= require components/pagination-helper
