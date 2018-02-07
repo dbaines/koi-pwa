@@ -54,9 +54,6 @@
   }
 
   $(document).on("ornament:refresh", function () {
-    if(Ornament.features.ie8) {
-      return false;
-    }
     MenuWithMore.init();
   });
 

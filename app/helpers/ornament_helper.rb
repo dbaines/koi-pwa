@@ -62,7 +62,14 @@ module OrnamentHelper
     if options[:koi] && defined?(Koi) 
       path = "koi/shared/icons"
     end
-    render("#{path}/#{icon_path}", options: options)
+    # simple-navigation has it's own render() method so 
+    # rendering partials inside simple-navigation needs a 
+    # bit of trickery
+    if defined?(render_icon)
+      render_icon(partial: "#{path}/#{icon_path}", locals: { options: options })
+    else
+      render("#{path}/#{icon_path}", options: options)
+    end
   end
 
   # SVG Image Helper

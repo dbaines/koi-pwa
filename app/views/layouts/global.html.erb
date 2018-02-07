@@ -96,18 +96,38 @@
           </div>
           <div class="header--navigation navigation">
             <div class="layout--container">
-              <nav>
-                <ul>
-                  <li><%= link_to "Koi Pages", koi_pages_path -%></li>
-                  <li><%= link_to "Geo", geolocation_path %></li>
-                  <li><%= link_to "Notifications", notifications_path %></li>
-                  <%- if user_signed_in? -%>
-                    <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { user_logout: "" } -%></li>
-                  <%- else -%>
-                    <li><%= link_to "Log In", new_user_session_path, data: { user_login: "" } -%></li>
-                    <li><%= link_to "Register", new_user_registration_path, data: { user_register: "" } -%></li>
-                  <%- end -%>
-                </ul>
+              <nav role="navigation">
+                <%= koi_render_navigation "header_nav", 
+                  "header_navigation", 
+                  renderer: :ornament_menu, 
+                  level: 1..2, 
+                  expand_all: true, 
+                  id_namespace: "header",
+                  dom_class: '',
+                  pre_items: [{
+                    key: "login",
+                    name: "Login",
+                    url: new_user_session_path,
+                    html_options: {
+                      data: {
+                        user_login: ""
+                      }
+                    }
+                  }]
+                %>
+                <% if false %>
+                  <ul>
+                    <li><%= link_to "Koi Pages", koi_pages_path -%></li>
+                    <li><%= link_to "Geo", geolocation_path %></li>
+                    <li><%= link_to "Notifications", notifications_path %></li>
+                    <%- if user_signed_in? -%>
+                      <li><%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { user_logout: "" } -%></li>
+                    <%- else -%>
+                      <li><%= link_to "Log In", new_user_session_path, data: { user_login: "" } -%></li>
+                      <li><%= link_to "Register", new_user_registration_path, data: { user_register: "" } -%></li>
+                    <%- end -%>
+                  </ul>
+                <% end %>
               </nav>
             </div>
           </div>
